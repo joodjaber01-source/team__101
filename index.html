@@ -1,352 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freecam UI</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<title>Freecam Menu</title>
 
-        body {
-            margin: 0;
-            background: transparent !important;
-            overflow: hidden;
-            width: 100vw;
-            height: 100vh;
-            font-family: 'Arial', sans-serif;
-            color: white;
-            user-select: none;
-        }
+<style>
+body {
+    margin: 0;
+    background: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    display: none;
+}
 
-        .crosshair {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 24px;
-            height: 24px;
-            pointer-events: none;
-        }
+/* PANEL */
+#panel {
+    position: absolute;
+    left: 50%;
+    bottom: 4vw;
+    transform: translateX(-50%);
+    width: 320px;
+    background: rgba(0,0,0,0.85);
+    border: 1px solid #00ff99;
+    border-radius: 12px;
+    padding: 14px;
+    color: white;
+}
 
-        .crosshair::before,
-        .crosshair::after {
-            content: '';
-            position: absolute;
-            background: #00ff00;
-            box-shadow: 0 0 5px #00ff00;
-        }
+/* TITLE */
+#title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #00ff99;
+    margin-bottom: 10px;
+}
 
-        .crosshair::before {
-            width: 2px;
-            height: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+/* BUTTON */
+button {
+    width: 100%;
+    margin: 4px 0;
+    padding: 8px;
+    background: #111;
+    color: white;
+    border: 1px solid #00ff99;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+button:hover {
+    background: #00ff99;
+    color: black;
+}
 
-        .crosshair::after {
-            width: 100%;
-            height: 2px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
+/* SECTION */
+.section {
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.85;
+}
 
-        .container {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #00ff00;
-            min-width: 300px;
-        }
+/* SELECT */
+select {
+    width: 100%;
+    padding: 6px;
+    background: #111;
+    color: white;
+    border: 1px solid #00ff99;
+    border-radius: 6px;
+}
 
-        .status {
-            color: #00ff00;
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-align: center;
-        }
+/* SLIDER */
+input[type=range] {
+    width: 100%;
+}
 
-        .mode {
-            color: #ffff00;
-            font-size: 16px;
-            margin: 5px 0;
-        }
+/* MODEL TEXT */
+.model {
+    text-align: center;
+    margin-top: 4px;
+    font-size: 13px;
+    color: #00ff99;
+}
 
-        .info {
-            color: #ffffff;
-            font-size: 14px;
-            margin: 3px 0;
-            font-family: monospace;
-        }
-
-        .controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: 1px solid #00ff00;
-            display: flex;
-            gap: 20px;
-        }
-
-        .control-item {
-            text-align: center;
-        }
-
-        .control-key {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 10px;
-            border-radius: 4px;
-            border: 1px solid #00ff00;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .control-desc {
-            font-size: 12px;
-            color: #cccccc;
-        }
-
-        .speed-indicator {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid #00ff00;
-            font-size: 16px;
-            font-weight: bold;
-            color: #00ff00;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .mode-selector {
-            position: absolute;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-
-        .mode-btn {
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            border: 1px solid #00ff00;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .mode-btn:hover {
-            background: rgba(0, 255, 0, 0.2);
-        }
-
-        .mode-btn.active {
-            background: rgba(0, 255, 0, 0.3);
-            color: #00ff00;
-            font-weight: bold;
-        }
-    </style>
+/* CROSSHAIR */
+#crosshair {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    transform: translate(-50%, -50%);
+    border: 2px solid white;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+</style>
 </head>
+
 <body>
-    <div class="crosshair"></div>
-    
-    <div class="container" id="infoPanel">
-        <div class="status" id="statusText">FREE CAM INACTIVE</div>
-        <div class="mode" id="modeText">Mode: Default</div>
-        <div class="info" id="positionText">Position: 0.00, 0.00, 0.00</div>
-        <div class="info" id="rotationText">Rotation: 0.00, 0.00, 0.00</div>
-        <div class="info" id="speedText">Speed: 1.0x</div>
-        <div class="info" id="fovText">FOV: 50.0</div>
-    </div>
 
-    <div class="speed-indicator" id="speedIndicator">
-        Speed: <span id="speedValue">1.0x</span>
-    </div>
+<div id="crosshair"></div>
 
-    <div class="controls">
-        <div class="control-item">
-            <div class="control-key">H</div>
-            <div class="control-desc">Toggle Freecam</div>
-        </div>
-        <div class="control-item">
-            <div class="control-key">WASD</div>
-            <div class="control-desc">Move</div>
-        </div>
-        <div class="control-item">
-            <div class="control-key">Q/E</div>
-            <div class="control-desc">Up/Down</div>
-        </div>
-        <div class="control-item">
-            <div class="control-key">SCROLL</div>
-            <div class="control-desc">Speed</div>
-        </div>
-    </div>
+<div id="panel">
+    <div id="title">FREECAM</div>
 
-    <div class="mode-selector" id="modeSelector">
-        <button class="mode-btn" data-mode="1">Default</button>
-        <button class="mode-btn" data-mode="2">Teleport</button>
-        <button class="mode-btn" data-mode="3">Shoot</button>
-        <button class="mode-btn" data-mode="6">Delete</button>
-    </div>
+    <button onclick="send('toggleFreecam')">Toggle Freecam</button>
 
-    <script>
-        // متغيرات الواجهة
-        let freecamActive = false;
-        let currentMode = 1;
-        let currentSpeed = 1.0;
+    <button onclick="send('teleport')">Teleport</button>
 
-        // عناصر DOM
-        const infoPanel = document.getElementById('infoPanel');
-        const statusText = document.getElementById('statusText');
-        const modeText = document.getElementById('modeText');
-        const positionText = document.getElementById('positionText');
-        const rotationText = document.getElementById('rotationText');
-        const speedText = document.getElementById('speedText');
-        const fovText = document.getElementById('fovText');
-        const speedIndicator = document.getElementById('speedIndicator');
-        const speedValue = document.getElementById('speedValue');
-        const modeSelector = document.getElementById('modeSelector');
-        const modeButtons = document.querySelectorAll('.mode-btn');
+    <div class="section">Spawn Object</div>
+    <select onchange="setObject(this.value)">
+        <option value="1">Object #1</option>
+        <option value="2">Object #2</option>
+        <option value="3">Object #3</option>
+    </select>
+    <button onclick="send('spawnObject')">Spawn Object</button>
 
-        // أسماء الأوضاع
-        const modeNames = {
-            1: "Default",
-            2: "Teleport",
-            3: "Shoot Weapon",
-            6: "Delete Entity"
-        };
+    <div class="section">Spawn Vehicle</div>
+    <select onchange="setVehicle(this.value)">
+        <option value="1">Vehicle #1</option>
+        <option value="2">Vehicle #2</option>
+        <option value="3">Vehicle #3</option>
+    </select>
+    <button onclick="send('spawnVehicle')">Spawn Vehicle</button>
 
-        // استقبال الرسائل من Lua
-        window.addEventListener('message', function(event) {
-            try {
-                const data = event.data;
-                
-                if (data.type === 'init') {
-                    console.log('Freecam UI initialized:', data.message);
-                }
-                else if (data.type === 'visibility') {
-                    setVisibility(data.show);
-                }
-                else if (data.type === 'update') {
-                    updateUI(data);
-                }
-            } catch (error) {
-                console.log('Error processing message:', error);
-            }
-        });
+    <button onclick="send('deleteEntity')">Delete Entity</button>
+    <button onclick="send('weaponShoot')">Weapon Shoot</button>
 
-        // تحديث الواجهة
-        function updateUI(data) {
-            freecamActive = data.enabled || false;
-            currentMode = data.mode || 1;
-            currentSpeed = data.speed || 1.0;
+    <div class="section">Freecam Speed</div>
+    <input type="range" min="0.3" max="5" step="0.1" value="1.5"
+           oninput="setSpeed(this.value)">
 
-            // تحديث النصوص
-            statusText.textContent = freecamActive ? "FREE CAM ACTIVE" : "FREE CAM INACTIVE";
-            statusText.style.color = freecamActive ? "#00ff00" : "#ff0000";
-            
-            modeText.textContent = `Mode: ${data.mode || "Default"}`;
-            
-            if (data.position) {
-                positionText.textContent = `Position: ${data.position.x.toFixed(2)}, ${data.position.y.toFixed(2)}, ${data.position.z.toFixed(2)}`;
-            }
-            
-            if (data.rotation) {
-                rotationText.textContent = `Rotation: ${data.rotation.x.toFixed(2)}, ${data.rotation.y.toFixed(2)}, ${data.rotation.z.toFixed(2)}`;
-            }
-            
-            speedText.textContent = `Speed: ${currentSpeed.toFixed(1)}x`;
-            speedValue.textContent = `${currentSpeed.toFixed(1)}x`;
-            
-            if (data.fov) {
-                fovText.textContent = `FOV: ${data.fov.toFixed(1)}`;
-            }
+    <div class="model" id="modelInfo"></div>
+</div>
 
-            // تحديث أزرار الأوضاع
-            updateModeButtons();
-            
-            // تحديث مؤشر السرعة
-            updateSpeedIndicator();
-        }
+<script>
+/* SEND TO LUA */
+function send(name) {
+    fetch(`https://${GetParentResourceName()}/${name}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: "{}"
+    });
+}
 
-        // تحديث أزرار الأوضاع
-        function updateModeButtons() {
-            modeButtons.forEach(button => {
-                const mode = parseInt(button.dataset.mode);
-                button.classList.toggle('active', mode === currentMode);
-                button.textContent = modeNames[mode] || `Mode ${mode}`;
-            });
-        }
+function setSpeed(val) {
+    fetch(`https://${GetParentResourceName()}/setSpeed`, {
+        method: "POST",
+        body: JSON.stringify({ speed: val })
+    });
+}
 
-        // تحديث مؤشر السرعة
-        function updateSpeedIndicator() {
-            if (currentSpeed > 5) {
-                speedIndicator.style.borderColor = '#ff0000';
-                speedValue.style.color = '#ff0000';
-            } else if (currentSpeed > 2) {
-                speedIndicator.style.borderColor = '#ffff00';
-                speedValue.style.color = '#ffff00';
-            } else {
-                speedIndicator.style.borderColor = '#00ff00';
-                speedValue.style.color = '#00ff00';
-            }
-        }
+function setObject(index) {
+    fetch(`https://${GetParentResourceName()}/setObject`, {
+        method: "POST",
+        body: JSON.stringify({ index: Number(index) })
+    });
+}
 
-        // إظهار/إخفاء الواجهة
-        function setVisibility(show) {
-            if (show) {
-                document.body.style.display = 'block';
-                infoPanel.classList.remove('hidden');
-                speedIndicator.classList.remove('hidden');
-                modeSelector.classList.remove('hidden');
-            } else {
-                document.body.style.display = 'none';
-            }
-        }
+function setVehicle(index) {
+    fetch(`https://${GetParentResourceName()}/setVehicle`, {
+        method: "POST",
+        body: JSON.stringify({ index: Number(index) })
+    });
+}
 
-        // إرسال رسالة للـ Lua
-        function sendMessageToLua(action, data = {}) {
-            window.parent.postMessage({
-                action: action,
-                ...data
-            }, '*');
-        }
+/* RECEIVE FROM LUA */
+window.addEventListener("message", function(e) {
+    if (e.data.action === "toggle") {
+        document.body.style.display = e.data.state ? "block" : "none";
+    }
+    if (e.data.action === "models") {
+        document.getElementById("modelInfo").innerText =
+            "Object: " + e.data.object + " | Vehicle: " + e.data.vehicle;
+    }
+});
 
-        // أحداث الأزرار
-        modeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const mode = parseInt(button.dataset.mode);
-                sendMessageToLua('changeMode', { mode: mode });
-            });
-        });
+/* SCROLL UI SELECTION (VISUAL ONLY) */
+window.addEventListener("wheel", e => {
+    document.getElementById("panel").style.borderColor =
+        e.deltaY < 0 ? "#00ff99" : "#ff4444";
+});
+</script>
 
-        // تهيئة الواجهة
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('Freecam HTML UI loaded');
-            setVisibility(false);
-            
-            // إرسال رسالة تهيئة
-            setTimeout(() => {
-                window.parent.postMessage({ type: 'uiReady' }, '*');
-            }, 1000);
-        });
-    </script>
 </body>
 </html>
