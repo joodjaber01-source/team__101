@@ -3,64 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <title>Freecam UI</title>
+
 <style>
-    body {
-        margin: 0;
-        background: transparent;
-        font-family: Arial, sans-serif;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    background: transparent;
+    font-family: Arial, sans-serif;
+}
 
-    #menu {
-        position: absolute;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 600px;
-        padding: 15px;
-        background: rgba(0,0,0,0.65);
-        border-radius: 12px;
-        text-align: center;
-        color: white;
-    }
+#box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.75);
+    padding: 20px;
+    width: 350px;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+}
 
-    #feature {
-        font-size: 26px;
-        color: #ff2b2b;
-        margin-bottom: 5px;
-    }
+h1 {
+    margin: 0 0 10px;
+    color: #ff2b2b;
+}
 
-    #model {
-        font-size: 18px;
-        color: #ccc;
-    }
+button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background: #111;
+    color: white;
+    border: 1px solid #ff2b2b;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-    .hint {
-        margin-top: 8px;
-        font-size: 14px;
-        color: #aaa;
-    }
+button:hover {
+    background: #ff2b2b;
+}
+
+.info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ccc;
+}
 </style>
 </head>
+
 <body>
 
-<div id="menu">
-    <div id="feature">Teleport</div>
-    <div id="model"></div>
-    <div class="hint">↑ ↓ Scroll | ← → Change | Click = Action</div>
+<div id="box">
+    <h1>FREECAM</h1>
+
+    <button onclick="send('toggle_cam')">Toggle Freecam</button>
+
+    <button onclick="send('prev_feature')">◀ Feature</button>
+    <button onclick="send('next_feature')">Feature ▶</button>
+
+    <button onclick="send('speed_down')">- Speed</button>
+    <button onclick="send('speed_up')">+ Speed</button>
+
+    <div class="info" id="state"></div>
 </div>
 
 <script>
-window.addEventListener("message", function (event) {
-    const data = event.data;
+function send(type) {
+    fetch(`https://${GetParentResourceName()}/action`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type })
+    });
+}
 
-    if (data.action === "setVisible") {
-        document.body.style.display = data.visible ? "block" : "none";
-    }
-
-    if (data.action === "update") {
-        document.getElementById("feature").innerText = data.feature || "";
-        document.getElementById("model").innerText = data.model || "";
+window.addEventListener("message", function(e) {
+    const d = e.data;
+    if (d.action === "update") {
+        document.getElementById("state").innerText =
+            `Feature: ${d.feature} | Speed: ${d.speed} | Cam: ${d.state ? "ON" : "OFF"}`;
     }
 });
 </script>
