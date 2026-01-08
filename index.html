@@ -3,14 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freecam UI - FiveM</title>
+    <title>Freecam UI</title>
     <style>
-        :root {
-            --green: 0, 255, 0;
-            --dark-bg: rgba(10, 10, 10, 0.95);
-            --light-bg: rgba(30, 30, 30, 0.9);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -19,729 +13,339 @@
 
         body {
             margin: 0;
-            background: transparent;
+            background: transparent !important;
             overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
             color: white;
             user-select: none;
-            -webkit-user-select: none;
-            height: 100vh;
-            width: 100vw;
         }
 
-        /* ================= CROSSHAIR ================= */
-        .Crosshair {
+        .crosshair {
             position: absolute;
-            left: 50%;
             top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             pointer-events: none;
-            z-index: 9999;
         }
 
-        .Crosshair::before,
-        .Crosshair::after {
+        .crosshair::before,
+        .crosshair::after {
             content: '';
             position: absolute;
-            background: rgba(var(--green), 0.9);
-            box-shadow: 0 0 5px rgba(var(--green), 0.5);
+            background: #00ff00;
+            box-shadow: 0 0 5px #00ff00;
         }
 
-        .Crosshair::before {
+        .crosshair::before {
             width: 2px;
             height: 100%;
             left: 50%;
             transform: translateX(-50%);
         }
 
-        .Crosshair::after {
+        .crosshair::after {
             width: 100%;
             height: 2px;
             top: 50%;
             transform: translateY(-50%);
         }
 
-        /* ================= FREECAM OPTIONS ================= */
-        .FCWrapper {
+        .container {
             position: absolute;
-            left: 50%;
-            bottom: 5vh;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            pointer-events: none;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px 25px;
-            border-radius: 10px;
-            border: 1px solid rgba(var(--green), 0.3);
-            backdrop-filter: blur(5px);
-            min-width: 250px;
-        }
-
-        .Option {
-            font-size: 16px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.6);
-            text-align: center;
-            padding: 8px 15px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            pointer-events: auto;
-        }
-
-        .Option:hover {
-            background: rgba(var(--green), 0.1);
-            transform: translateY(-1px);
-        }
-
-        .Option.Selected {
-            background: rgba(var(--green), 0.2);
-            color: rgb(var(--green));
-            font-weight: 600;
-            transform: scale(1.05);
-            border: 1px solid rgba(var(--green), 0.4);
-            box-shadow: 0 0 15px rgba(var(--green), 0.3);
-        }
-
-        .FCdash {
-            color: rgb(var(--green));
-            font-weight: bold;
-            margin: 0 10px;
-        }
-
-        /* ================= KEYBINDS PANEL ================= */
-        .KBLWrapper {
-            position: absolute;
-            right: 20px;
             top: 20px;
-            width: 220px;
-            background: rgba(0, 0, 0, 0.85);
-            border: 1px solid rgba(var(--green), 0.4);
-            border-radius: 8px;
-            font-size: 13px;
-            color: white;
-            z-index: 100;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        .KBLHeader {
-            padding: 12px 15px;
-            border-bottom: 1px solid rgba(var(--green), 0.4);
-            text-align: center;
-            font-weight: 700;
-            font-size: 14px;
-            background: rgba(var(--green), 0.1);
-            color: rgb(var(--green));
-            letter-spacing: 1px;
-        }
-
-        .Keybind {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: background 0.2s ease;
-        }
-
-        .Keybind:hover {
-            background: rgba(var(--green), 0.1);
-        }
-
-        .Keybind:last-child {
-            border-bottom: none;
-        }
-
-        .Keybind span:first-child {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .Keybind span:last-child {
-            color: rgb(var(--green));
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 3px 8px;
-            border-radius: 4px;
-            border: 1px solid rgba(var(--green), 0.3);
-        }
-
-        /* ================= INFO PANEL ================= */
-        .InfoPanel {
-            position: absolute;
             left: 20px;
-            top: 20px;
-            background: rgba(0, 0, 0, 0.85);
-            border: 1px solid rgba(var(--green), 0.4);
-            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.8);
             padding: 15px;
-            width: 300px;
-            z-index: 100;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            border: 1px solid #00ff00;
+            min-width: 300px;
         }
 
-        .InfoHeader {
-            color: rgb(var(--green));
-            font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(var(--green), 0.3);
-            text-align: center;
-        }
-
-        .InfoItem {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 13px;
-        }
-
-        .InfoItem:last-child {
-            margin-bottom: 0;
-        }
-
-        .InfoLabel {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .InfoValue {
-            color: white;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-        }
-
-        /* ================= SPEED INDICATOR ================= */
-        .SpeedIndicator {
-            position: absolute;
-            left: 50%;
-            bottom: 20vh;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(var(--green), 0.4);
-            font-size: 14px;
-            font-weight: 600;
-            color: rgb(var(--green));
-            z-index: 100;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        /* ================= STATUS INDICATOR ================= */
-        .StatusIndicator {
-            position: absolute;
-            right: 20px;
-            bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(var(--green), 0.4);
-            z-index: 100;
-            backdrop-filter: blur(5px);
-        }
-
-        .StatusDot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 0, 0, 0.7);
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .StatusDot.active {
-            background: rgba(var(--green), 0.9);
-            box-shadow: 0 0 15px rgba(var(--green), 0.7);
-        }
-
-        .StatusText {
-            font-size: 13px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        /* ================= MODAL ================= */
-        .Modal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid rgba(var(--green), 0.5);
-            border-radius: 10px;
-            padding: 25px;
-            width: 400px;
-            z-index: 1000;
-            display: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-        }
-
-        .Modal.active {
-            display: block;
-        }
-
-        .ModalHeader {
-            color: rgb(var(--green));
+        .status {
+            color: #00ff00;
             font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
             text-align: center;
         }
 
-        .ModalContent {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 20px;
+        .mode {
+            color: #ffff00;
+            font-size: 16px;
+            margin: 5px 0;
         }
 
-        .ModalButton {
-            background: rgba(var(--green), 0.2);
-            color: rgb(var(--green));
-            border: 1px solid rgba(var(--green), 0.4);
+        .info {
+            color: #ffffff;
+            font-size: 14px;
+            margin: 3px 0;
+            font-family: monospace;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
             padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 600;
+            border-radius: 8px;
+            border: 1px solid #00ff00;
+            display: flex;
+            gap: 20px;
+        }
+
+        .control-item {
+            text-align: center;
+        }
+
+        .control-key {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid #00ff00;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .control-desc {
+            font-size: 12px;
+            color: #cccccc;
+        }
+
+        .speed-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #00ff00;
+            font-size: 16px;
+            font-weight: bold;
+            color: #00ff00;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .mode-selector {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .mode-btn {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: 1px solid #00ff00;
+            padding: 8px 15px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            width: 100%;
-            font-size: 14px;
+            transition: all 0.2s;
         }
 
-        .ModalButton:hover {
-            background: rgba(var(--green), 0.3);
-            transform: translateY(-2px);
+        .mode-btn:hover {
+            background: rgba(0, 255, 0, 0.2);
         }
 
-        /* ================= ANIMATIONS ================= */
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .slide-in {
-            animation: slideIn 0.3s ease;
-        }
-
-        /* ================= RESPONSIVE ================= */
-        @media (max-height: 800px) {
-            .FCWrapper {
-                bottom: 2vh;
-                gap: 8px;
-                padding: 10px 20px;
-            }
-            
-            .Option {
-                font-size: 14px;
-                padding: 6px 12px;
-            }
-            
-            .SpeedIndicator {
-                bottom: 15vh;
-            }
+        .mode-btn.active {
+            background: rgba(0, 255, 0, 0.3);
+            color: #00ff00;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-
-    <!-- CROSSHAIR -->
-    <div class="Crosshair"></div>
-
-    <!-- FREECAM OPTIONS -->
-    <div class="FCWrapper" id="fcWrapper">
-        <div class="Option Selected" data-mode="1"><span class="FCdash">-</span> Default Mode <span class="FCdash">-</span></div>
-        <div class="Option" data-mode="2"><span class="FCdash">-</span> Teleport Mode <span class="FCdash">-</span></div>
-        <div class="Option" data-mode="3"><span class="FCdash">-</span> Shoot Weapon <span class="FCdash">-</span></div>
-        <div class="Option" data-mode="4"><span class="FCdash">-</span> Spawn Object <span class="FCdash">-</span></div>
-        <div class="Option" data-mode="5"><span class="FCdash">-</span> Spawn Vehicle <span class="FCdash">-</span></div>
-        <div class="Option" data-mode="6"><span class="FCdash">-</span> Delete Entity <span class="FCdash">-</span></div>
+    <div class="crosshair"></div>
+    
+    <div class="container" id="infoPanel">
+        <div class="status" id="statusText">FREE CAM INACTIVE</div>
+        <div class="mode" id="modeText">Mode: Default</div>
+        <div class="info" id="positionText">Position: 0.00, 0.00, 0.00</div>
+        <div class="info" id="rotationText">Rotation: 0.00, 0.00, 0.00</div>
+        <div class="info" id="speedText">Speed: 1.0x</div>
+        <div class="info" id="fovText">FOV: 50.0</div>
     </div>
 
-    <!-- KEYBINDS PANEL -->
-    <div class="KBLWrapper">
-        <div class="KBLHeader">🎮 FREE CAM CONTROLS</div>
-        <div class="Keybind"><span>Toggle Freecam</span><span>H</span></div>
-        <div class="Keybind"><span>Move</span><span>W A S D</span></div>
-        <div class="Keybind"><span>Up / Down</span><span>Q / E</span></div>
-        <div class="Keybind"><span>Speed Up/Down</span><span>SCROLL</span></div>
-        <div class="Keybind"><span>Speed Boost</span><span>LEFT SHIFT</span></div>
-        <div class="Keybind"><span>Change Mode</span><span>UP / DOWN</span></div>
-        <div class="Keybind"><span>Select Mode</span><span>ENTER</span></div>
-        <div class="Keybind"><span>Look Around</span><span>RIGHT CLICK</span></div>
+    <div class="speed-indicator" id="speedIndicator">
+        Speed: <span id="speedValue">1.0x</span>
     </div>
 
-    <!-- INFO PANEL -->
-    <div class="InfoPanel" id="infoPanel">
-        <div class="InfoHeader">📊 FREE CAM INFO</div>
-        <div class="InfoItem">
-            <span class="InfoLabel">Position:</span>
-            <span class="InfoValue" id="posX">0.00</span>
-            <span class="InfoValue" id="posY">0.00</span>
-            <span class="InfoValue" id="posZ">0.00</span>
+    <div class="controls">
+        <div class="control-item">
+            <div class="control-key">H</div>
+            <div class="control-desc">Toggle Freecam</div>
         </div>
-        <div class="InfoItem">
-            <span class="InfoLabel">Rotation:</span>
-            <span class="InfoValue" id="rotX">0.00</span>
-            <span class="InfoValue" id="rotY">0.00</span>
-            <span class="InfoValue" id="rotZ">0.00</span>
+        <div class="control-item">
+            <div class="control-key">WASD</div>
+            <div class="control-desc">Move</div>
         </div>
-        <div class="InfoItem">
-            <span class="InfoLabel">Current Mode:</span>
-            <span class="InfoValue" id="currentMode">Default</span>
+        <div class="control-item">
+            <div class="control-key">Q/E</div>
+            <div class="control-desc">Up/Down</div>
         </div>
-        <div class="InfoItem">
-            <span class="InfoLabel">FOV:</span>
-            <span class="InfoValue" id="fovValue">50.0</span>
-        </div>
-        <div class="InfoItem">
-            <span class="InfoLabel">Speed:</span>
-            <span class="InfoValue" id="speedValue">1.0x</span>
+        <div class="control-item">
+            <div class="control-key">SCROLL</div>
+            <div class="control-desc">Speed</div>
         </div>
     </div>
 
-    <!-- SPEED INDICATOR -->
-    <div class="SpeedIndicator" id="speedIndicator">
-        Speed: <span id="speedText">1.0x</span>
-    </div>
-
-    <!-- STATUS INDICATOR -->
-    <div class="StatusIndicator" id="statusIndicator">
-        <div class="StatusDot" id="statusDot"></div>
-        <span class="StatusText" id="statusText">Freecam: DISABLED</span>
-    </div>
-
-    <!-- MODAL FOR SPAWNING -->
-    <div class="Modal" id="spawnModal">
-        <div class="ModalHeader">🚗 Spawn Vehicle</div>
-        <div class="ModalContent">
-            <p>Enter vehicle model name:</p>
-            <input type="text" id="vehicleModel" placeholder="e.g., adder, entityxf" style="width: 100%; padding: 8px; margin: 10px 0; background: rgba(255,255,255,0.1); border: 1px solid rgba(var(--green),0.3); color: white; border-radius: 4px;">
-            <p style="font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 5px;">Press ENTER to confirm, ESC to cancel</p>
-        </div>
-        <button class="ModalButton" onclick="confirmSpawn()">Spawn Vehicle</button>
-    </div>
-
-    <!-- MODAL FOR OBJECT SPAWN -->
-    <div class="Modal" id="objectModal">
-        <div class="ModalHeader">📦 Spawn Object</div>
-        <div class="ModalContent">
-            <p>Enter object model name:</p>
-            <input type="text" id="objectModel" placeholder="e.g., prop_beach_fire" style="width: 100%; padding: 8px; margin: 10px 0; background: rgba(255,255,255,0.1); border: 1px solid rgba(var(--green),0.3); color: white; border-radius: 4px;">
-            <p style="font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 5px;">Press ENTER to confirm, ESC to cancel</p>
-        </div>
-        <button class="ModalButton" onclick="confirmObjectSpawn()">Spawn Object</button>
+    <div class="mode-selector" id="modeSelector">
+        <button class="mode-btn" data-mode="1">Default</button>
+        <button class="mode-btn" data-mode="2">Teleport</button>
+        <button class="mode-btn" data-mode="3">Shoot</button>
+        <button class="mode-btn" data-mode="6">Delete</button>
     </div>
 
     <script>
-        // الوضع الحالي
+        // متغيرات الواجهة
+        let freecamActive = false;
         let currentMode = 1;
-        let freecamEnabled = false;
         let currentSpeed = 1.0;
-        
-        // عناصر DOM
-        const options = document.querySelectorAll('.Option');
-        const speedText = document.getElementById('speedText');
-        const speedIndicator = document.getElementById('speedIndicator');
-        const statusDot = document.getElementById('statusDot');
-        const statusText = document.getElementById('statusText');
-        const infoPanel = document.getElementById('infoPanel');
-        
-        // عناصر المعلومات
-        const posX = document.getElementById('posX');
-        const posY = document.getElementById('posY');
-        const posZ = document.getElementById('posZ');
-        const rotX = document.getElementById('rotX');
-        const rotY = document.getElementById('rotY');
-        const rotZ = document.getElementById('rotZ');
-        const currentModeText = document.getElementById('currentMode');
-        const fovValue = document.getElementById('fovValue');
-        const speedValue = document.getElementById('speedValue');
-        
-        // عناصر المودال
-        const spawnModal = document.getElementById('spawnModal');
-        const objectModal = document.getElementById('objectModal');
-        const vehicleModelInput = document.getElementById('vehicleModel');
-        const objectModelInput = document.getElementById('objectModel');
 
-        // اسماء الأوضاع
+        // عناصر DOM
+        const infoPanel = document.getElementById('infoPanel');
+        const statusText = document.getElementById('statusText');
+        const modeText = document.getElementById('modeText');
+        const positionText = document.getElementById('positionText');
+        const rotationText = document.getElementById('rotationText');
+        const speedText = document.getElementById('speedText');
+        const fovText = document.getElementById('fovText');
+        const speedIndicator = document.getElementById('speedIndicator');
+        const speedValue = document.getElementById('speedValue');
+        const modeSelector = document.getElementById('modeSelector');
+        const modeButtons = document.querySelectorAll('.mode-btn');
+
+        // أسماء الأوضاع
         const modeNames = {
             1: "Default",
             2: "Teleport",
             3: "Shoot Weapon",
-            4: "Spawn Object",
-            5: "Spawn Vehicle",
             6: "Delete Entity"
         };
-
-        // تحديث الواجهة بناء على البيانات من Lua
-        function updateUI(data) {
-            freecamEnabled = data.enabled || false;
-            currentMode = data.mode || 1;
-            currentSpeed = data.speed || 1.0;
-            
-            // تحديث حالة الفري كام
-            updateFreecamStatus(freecamEnabled);
-            
-            // تحديث الوضع المحدد
-            options.forEach((option, index) => {
-                const isSelected = (index + 1) === currentMode;
-                option.classList.toggle('Selected', isSelected);
-                
-                // إضافة تأثير للوضع المحدد
-                if (isSelected) {
-                    option.style.animation = 'pulse 2s infinite';
-                } else {
-                    option.style.animation = 'none';
-                }
-            });
-            
-            // تحديث معلومات الموضع إذا كانت متوفرة
-            if (data.position) {
-                updatePositionInfo(data.position);
-            }
-            
-            if (data.rotation) {
-                updateRotationInfo(data.rotation);
-            }
-            
-            if (data.fov) {
-                updateFOVInfo(data.fov);
-            }
-            
-            // تحديث معلومات السرعة
-            updateSpeedInfo(currentSpeed);
-            
-            // تحديث الوضع الحالي
-            currentModeText.textContent = modeNames[currentMode] || "Unknown";
-            
-            // إظهار/إخفاء لوحة السرعة
-            speedIndicator.style.display = freecamEnabled ? 'block' : 'none';
-        }
-
-        // تحديث حالة الفري كام
-        function updateFreecamStatus(enabled) {
-            if (enabled) {
-                statusDot.classList.add('active');
-                statusText.textContent = 'Freecam: ENABLED';
-                infoPanel.style.display = 'block';
-                speedIndicator.style.display = 'block';
-            } else {
-                statusDot.classList.remove('active');
-                statusText.textContent = 'Freecam: DISABLED';
-                infoPanel.style.display = 'none';
-                speedIndicator.style.display = 'none';
-            }
-        }
-
-        // تحديث معلومات الموضع
-        function updatePositionInfo(position) {
-            posX.textContent = position.x ? position.x.toFixed(2) : "0.00";
-            posY.textContent = position.y ? position.y.toFixed(2) : "0.00";
-            posZ.textContent = position.z ? position.z.toFixed(2) : "0.00";
-        }
-
-        // تحديث معلومات الدوران
-        function updateRotationInfo(rotation) {
-            rotX.textContent = rotation.x ? rotation.x.toFixed(2) : "0.00";
-            rotY.textContent = rotation.y ? rotation.y.toFixed(2) : "0.00";
-            rotZ.textContent = rotation.z ? rotation.z.toFixed(2) : "0.00";
-        }
-
-        // تحديث معلومات FOV
-        function updateFOVInfo(fov) {
-            fovValue.textContent = fov ? fov.toFixed(1) : "50.0";
-        }
-
-        // تحديث معلومات السرعة
-        function updateSpeedInfo(speed) {
-            speedText.textContent = speed.toFixed(1) + 'x';
-            speedValue.textContent = speed.toFixed(1) + 'x';
-            
-            // تغيير اللون بناء على السرعة
-            if (speed > 5.0) {
-                speedText.style.color = 'rgba(255, 50, 50, 0.9)';
-            } else if (speed > 2.0) {
-                speedText.style.color = 'rgba(255, 255, 0, 0.9)';
-            } else {
-                speedText.style.color = 'rgba(0, 255, 0, 0.9)';
-            }
-        }
-
-        // إرسال رسالة لـ Lua
-        function sendMessageToLua(message) {
-            if (window.invokeNative) {
-                window.invokeNative('sendMessageToLua', JSON.stringify(message));
-            } else if (window.parent !== window) {
-                window.parent.postMessage(message, '*');
-            }
-            
-            // طباعة للتصحيح
-            console.log('Sending to Lua:', message);
-        }
-
-        // تغيير الوضع عند النقر على خيار
-        options.forEach(option => {
-            option.addEventListener('click', (e) => {
-                const mode = parseInt(e.currentTarget.dataset.mode);
-                changeMode(mode);
-            });
-        });
-
-        // تغيير الوضع
-        function changeMode(mode) {
-            if (mode < 1) mode = 6;
-            if (mode > 6) mode = 1;
-            
-            currentMode = mode;
-            
-            // إرسال للـ Lua
-            sendMessageToLua({
-                action: 'changeMode',
-                mode: mode
-            });
-            
-            // فتح المودال إذا كان وضع السباون
-            if (mode === 5) {
-                openSpawnModal();
-            } else if (mode === 4) {
-                openObjectModal();
-            }
-        }
-
-        // فتح مودال السباون
-        function openSpawnModal() {
-            spawnModal.classList.add('active');
-            vehicleModelInput.value = '';
-            vehicleModelInput.focus();
-        }
-
-        // فتح مودال الأوبجكت
-        function openObjectModal() {
-            objectModal.classList.add('active');
-            objectModelInput.value = '';
-            objectModelInput.focus();
-        }
-
-        // إغلاق جميع المودالات
-        function closeAllModals() {
-            spawnModal.classList.remove('active');
-            objectModal.classList.remove('active');
-        }
-
-        // تأكيد سباون المركبة
-        function confirmSpawn() {
-            const model = vehicleModelInput.value.trim();
-            if (model) {
-                sendMessageToLua({
-                    action: 'spawnVehicle',
-                    model: model
-                });
-                closeAllModals();
-            }
-        }
-
-        // تأكيد سباون الأوبجكت
-        function confirmObjectSpawn() {
-            const model = objectModelInput.value.trim();
-            if (model) {
-                sendMessageToLua({
-                    action: 'spawnObject',
-                    model: model
-                });
-                closeAllModals();
-            }
-        }
-
-        // أحداث لوحة المفاتيح للمودال
-        document.addEventListener('keydown', (e) => {
-            // إغلاق المودال بـ ESC
-            if (e.key === 'Escape') {
-                closeAllModals();
-                // العودة للوضع الافتراضي
-                changeMode(1);
-            }
-            
-            // تأكيد بـ Enter
-            if (e.key === 'Enter') {
-                if (spawnModal.classList.contains('active')) {
-                    confirmSpawn();
-                } else if (objectModal.classList.contains('active')) {
-                    confirmObjectSpawn();
-                }
-            }
-        });
 
         // استقبال الرسائل من Lua
         window.addEventListener('message', function(event) {
             try {
-                const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+                const data = event.data;
                 
-                if (data.action === 'updateFreecam') {
-                    updateUI(data);
-                } else if (data.action === 'setVisible') {
-                    document.body.style.display = data.visible ? 'block' : 'none';
-                } else if (data.action === 'notification') {
-                    showNotification(data.message, data.type);
+                if (data.type === 'init') {
+                    console.log('Freecam UI initialized:', data.message);
                 }
-            } catch (e) {
-                console.log('Error parsing message:', e);
+                else if (data.type === 'visibility') {
+                    setVisibility(data.show);
+                }
+                else if (data.type === 'update') {
+                    updateUI(data);
+                }
+            } catch (error) {
+                console.log('Error processing message:', error);
             }
         });
 
-        // إظهار إشعار
-        function showNotification(message, type = 'info') {
-            console.log(`[${type.toUpperCase()}] ${message}`);
+        // تحديث الواجهة
+        function updateUI(data) {
+            freecamActive = data.enabled || false;
+            currentMode = data.mode || 1;
+            currentSpeed = data.speed || 1.0;
+
+            // تحديث النصوص
+            statusText.textContent = freecamActive ? "FREE CAM ACTIVE" : "FREE CAM INACTIVE";
+            statusText.style.color = freecamActive ? "#00ff00" : "#ff0000";
+            
+            modeText.textContent = `Mode: ${data.mode || "Default"}`;
+            
+            if (data.position) {
+                positionText.textContent = `Position: ${data.position.x.toFixed(2)}, ${data.position.y.toFixed(2)}, ${data.position.z.toFixed(2)}`;
+            }
+            
+            if (data.rotation) {
+                rotationText.textContent = `Rotation: ${data.rotation.x.toFixed(2)}, ${data.rotation.y.toFixed(2)}, ${data.rotation.z.toFixed(2)}`;
+            }
+            
+            speedText.textContent = `Speed: ${currentSpeed.toFixed(1)}x`;
+            speedValue.textContent = `${currentSpeed.toFixed(1)}x`;
+            
+            if (data.fov) {
+                fovText.textContent = `FOV: ${data.fov.toFixed(1)}`;
+            }
+
+            // تحديث أزرار الأوضاع
+            updateModeButtons();
+            
+            // تحديث مؤشر السرعة
+            updateSpeedIndicator();
         }
+
+        // تحديث أزرار الأوضاع
+        function updateModeButtons() {
+            modeButtons.forEach(button => {
+                const mode = parseInt(button.dataset.mode);
+                button.classList.toggle('active', mode === currentMode);
+                button.textContent = modeNames[mode] || `Mode ${mode}`;
+            });
+        }
+
+        // تحديث مؤشر السرعة
+        function updateSpeedIndicator() {
+            if (currentSpeed > 5) {
+                speedIndicator.style.borderColor = '#ff0000';
+                speedValue.style.color = '#ff0000';
+            } else if (currentSpeed > 2) {
+                speedIndicator.style.borderColor = '#ffff00';
+                speedValue.style.color = '#ffff00';
+            } else {
+                speedIndicator.style.borderColor = '#00ff00';
+                speedValue.style.color = '#00ff00';
+            }
+        }
+
+        // إظهار/إخفاء الواجهة
+        function setVisibility(show) {
+            if (show) {
+                document.body.style.display = 'block';
+                infoPanel.classList.remove('hidden');
+                speedIndicator.classList.remove('hidden');
+                modeSelector.classList.remove('hidden');
+            } else {
+                document.body.style.display = 'none';
+            }
+        }
+
+        // إرسال رسالة للـ Lua
+        function sendMessageToLua(action, data = {}) {
+            window.parent.postMessage({
+                action: action,
+                ...data
+            }, '*');
+        }
+
+        // أحداث الأزرار
+        modeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const mode = parseInt(button.dataset.mode);
+                sendMessageToLua('changeMode', { mode: mode });
+            });
+        });
 
         // تهيئة الواجهة
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('Freecam UI initialized');
+            console.log('Freecam HTML UI loaded');
+            setVisibility(false);
             
-            // إضافة تأثيرات دخول
-            document.querySelectorAll('.FCWrapper, .KBLWrapper, .InfoPanel').forEach(el => {
-                el.classList.add('slide-in');
-            });
-            
-            // إرسال رسالة تهيئة لـ Lua
+            // إرسال رسالة تهيئة
             setTimeout(() => {
-                sendMessageToLua({ action: 'uiReady' });
+                window.parent.postMessage({ type: 'uiReady' }, '*');
             }, 1000);
-        });
-
-        // إضافة تأثيرات للماوس
-        document.addEventListener('mousemove', (e) => {
-            const crosshair = document.querySelector('.Crosshair');
-            crosshair.style.transform = `translate(calc(-50% + ${e.movementX * 0.1}px), calc(-50% + ${e.movementY * 0.1}px))`;
         });
     </script>
 </body>
