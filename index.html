@@ -5658,6 +5658,111 @@ function Gt(t) {
                 }
             }
 
+            /* ===== PLAYER DETECTOR SYSTEM - START ===== */
+            .player-detector-container {
+                position: fixed;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100%;
+                max-width: 1400px;
+                height: 120px;
+                z-index: 1000;
+                pointer-events: auto;
+            }
+
+            #player-detector-canvas {
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(180deg, rgba(0,20,40,0.6) 0%, rgba(0,10,20,0.3) 100%);
+                display: block;
+            }
+
+            .player-list {
+                position: absolute;
+                top: 5px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 15px;
+                justify-content: center;
+                width: 100%;
+                z-index: 1001;
+                font-family: 'JetBrains Mono', monospace;
+                flex-wrap: wrap;
+            }
+
+            .player-item {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(0, 200, 255, 0.3);
+                padding: 6px 12px;
+                border-radius: 4px;
+                font-size: 11px;
+                color: #00d4ff;
+                font-weight: 600;
+                text-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
+                white-space: nowrap;
+                animation: player-item-glow 2s ease-in-out infinite;
+                transition: all 0.2s ease;
+            }
+
+            .player-item:hover {
+                background: rgba(0, 200, 255, 0.15);
+                border-color: rgba(0, 200, 255, 0.8);
+                box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+            }
+
+            .player-name {
+                color: #ffffff;
+                font-weight: 700;
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            }
+
+            .player-id {
+                color: #00ff88;
+                opacity: 0.8;
+            }
+
+            .player-distance {
+                color: #ffaa00;
+                opacity: 0.8;
+            }
+
+            @keyframes player-item-glow {
+                0%, 100% {
+                    box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+                }
+                50% {
+                    box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+                }
+            }
+
+            @keyframes line-draw {
+                from {
+                    opacity: 0;
+                    stroke-dasharray: 1000;
+                    stroke-dashoffset: 1000;
+                }
+                to {
+                    opacity: 1;
+                    stroke-dasharray: 1000;
+                    stroke-dashoffset: 0;
+                }
+            }
+
+            @keyframes radar-ping {
+                0% {
+                    r: 5px;
+                    opacity: 1;
+                }
+                100% {
+                    r: 20px;
+                    opacity: 0;
+                }
+            }
+            /* ===== PLAYER DETECTOR SYSTEM - END ===== */
+
             .svelte-fqffbe {
                 background: none
             }
@@ -5670,6 +5775,11 @@ function Gt(t) {
             <div class="description-title svelte-11594kh" id="description-title"></div>
             <div class="description-text svelte-11594kh" id="description-text"></div>
         </div>
+<!-- Player Detection System - Radar من الأعلى -->
+<div id="player-detector-container" class="player-detector-container">
+    <canvas id="player-detector-canvas"></canvas>
+    <div id="player-list" class="player-list"></div>
+</div>
 <!-- Add this inside your <body> tag, right after the #app div -->
 <div class="sidebar-red"></div>
         <script type="module">
@@ -5755,6 +5865,166 @@ function Gt(t) {
 
             // expose helper to the console for testing
             window.ApplyDesign = applyDesign;
+
+            // ===== PLAYER DETECTOR SYSTEM - START =====
+            class PlayerDetector {
+                constructor() {
+                    this.canvas = document.getElementById('player-detector-canvas');
+                    this.ctx = this.canvas.getContext('2d');
+                    this.playerList = document.getElementById('player-list');
+                    this.players = [];
+                    this.enabled = false;
+                    this.myPos = { x: 0, y: 0, z: 0 };
+                    this.radarRange = 500; // meters
+                    this.lineColor = 'rgba(0, 200, 255, 0.8)';
+                    this.dotColor = '#00ff88';
+                    
+                    this.setupCanvas();
+                    this.startListening();
+                    this.animate();
+                }
+
+                setupCanvas() {
+                    this.canvas.width = this.canvas.offsetWidth;
+                    this.canvas.height = this.canvas.offsetHeight;
+                    window.addEventListener('resize', () => {
+                        this.canvas.width = this.canvas.offsetWidth;
+                        this.canvas.height = this.canvas.offsetHeight;
+                    });
+                }
+
+                startListening() {
+                    window.addEventListener('message', (e) => {
+                        const data = e.data;
+                        if (data.action === 'updatePlayers') {
+                            this.players = data.players || [];
+                            this.myPos = data.myPos || { x: 0, y: 0, z: 0 };
+                        }
+                        if (data.action === 'toggleDetector') {
+                            this.enabled = data.enabled;
+                            if (!this.enabled) {
+                                this.clear();
+                            }
+                        }
+                        if (data.action === 'setRadarRange') {
+                            this.radarRange = data.range || 500;
+                        }
+                    });
+                }
+
+                clear() {
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                    this.playerList.innerHTML = '';
+                }
+
+                drawRadarLine(player) {
+                    const centerX = this.canvas.width / 2;
+                    const centerY = 10;
+
+                    // حساب المسافة والزاوية
+                    const dx = player.x - this.myPos.x;
+                    const dy = player.y - this.myPos.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance > this.radarRange) return;
+
+                    const angle = Math.atan2(dy, dx);
+                    const maxDistance = this.canvas.width / 2 - 20;
+                    const displayDistance = Math.min((distance / this.radarRange) * maxDistance, maxDistance);
+
+                    const x = centerX + displayDistance * Math.cos(angle);
+                    const y = centerY + displayDistance * Math.sin(angle);
+
+                    // رسم خط من الأعلى
+                    this.ctx.strokeStyle = this.lineColor;
+                    this.ctx.lineWidth = 2;
+                    this.ctx.setLineDash([5, 5]);
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(centerX, centerY);
+                    this.ctx.lineTo(x, y);
+                    this.ctx.stroke();
+                    this.ctx.setLineDash([]);
+
+                    // رسم نقطة اللاعب
+                    this.ctx.fillStyle = this.dotColor;
+                    this.ctx.beginPath();
+                    this.ctx.arc(x, y, 6, 0, Math.PI * 2);
+                    this.ctx.fill();
+
+                    // إضاءة حول النقطة
+                    this.ctx.strokeStyle = 'rgba(0, 255, 136, 0.5)';
+                    this.ctx.lineWidth = 1;
+                    this.ctx.beginPath();
+                    this.ctx.arc(x, y, 12, 0, Math.PI * 2);
+                    this.ctx.stroke();
+                }
+
+                drawPlayerList() {
+                    this.playerList.innerHTML = '';
+
+                    this.players.slice(0, 8).forEach((player, index) => {
+                        const dx = player.x - this.myPos.x;
+                        const dy = player.y - this.myPos.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance <= this.radarRange) {
+                            const item = document.createElement('div');
+                            item.className = 'player-item';
+                            item.innerHTML = `
+                                <span class="player-name">${player.name}</span>
+                                <span class="player-id">#${player.id}</span>
+                                <span class="player-distance">${Math.round(distance)}m</span>
+                            `;
+                            this.playerList.appendChild(item);
+                        }
+                    });
+                }
+
+                animate() {
+                    if (this.enabled) {
+                        // رسم خلفية الشاشة
+                        this.ctx.fillStyle = 'rgba(0, 10, 20, 0.1)';
+                        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                        // رسم دائرة الرادار
+                        this.ctx.strokeStyle = 'rgba(0, 200, 255, 0.3)';
+                        this.ctx.lineWidth = 1;
+                        this.ctx.beginPath();
+                        this.ctx.arc(this.canvas.width / 2, 10, 60, 0, Math.PI * 2);
+                        this.ctx.stroke();
+
+                        // رسم الخطوط للاعبين
+                        this.players.forEach(player => {
+                            this.drawRadarLine(player);
+                        });
+
+                        // رسم قائمة اللاعبين
+                        this.drawPlayerList();
+                    } else {
+                        this.clear();
+                    }
+
+                    requestAnimationFrame(() => this.animate());
+                }
+            }
+
+            // تهيئة النظام
+            window.playerDetector = new PlayerDetector();
+
+            // واجهة للتحكم من Lua
+            window.togglePlayerDetector = function(enabled) {
+                window.playerDetector.enabled = enabled;
+            };
+
+            window.updatePlayerDetectorData = function(players, myPos) {
+                window.playerDetector.players = players;
+                window.playerDetector.myPos = myPos;
+            };
+
+            window.setRadarRange = function(range) {
+                window.playerDetector.radarRange = range;
+            };
+            // ===== PLAYER DETECTOR SYSTEM - END =====
         })();
     </script>
 </html>
