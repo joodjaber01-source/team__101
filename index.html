@@ -10,7 +10,7 @@
         <style>
             
 /* LEFT SIDEBAR - Thin Red Glowing Bar */
-/* === START: max MENU IMAGE STYLE === */
+/* === START: HEX MENU IMAGE STYLE === */
 * {
     margin: 0;
     padding: 0;
@@ -28,7 +28,7 @@ html, body {
     --menu-color-r: 1; /* 255/255 */
     --menu-color-g: 0;
     --menu-color-b: 0;
-    --menu-color-max: rgb(0, 0, 0);
+    --menu-color-hex: rgb(0, 0, 0);
     --menu-bg-color: #000000;
     --menu-border-color: #383838;
     --menu-selection-color: rgba(78, 78, 78, 0.1);
@@ -60,7 +60,7 @@ html, body {
     overflow: hidden;
     font-family: 'Inter', 'JetBrains Mono', monospace;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.4),
-                0 20px 60px rgba(46, 46, 46, 0.021);
+                0 20px 60px rgba(0, 0, 0, 0.95);
     transition: all 0.3s ease;
 }
 /* Header Banner */
@@ -171,13 +171,13 @@ html, body {
 
 .menu-item.svelte-11594kh:hover {
     background: rgba(204, 51, 0, 0.15);
-    border: 1px solid rgba(56, 56, 56, 0.3);
+    border: 1px solid rgba(204, 51, 0, 0.3);
     color: #ffffff;
 }
 
 .menu-item.active.svelte-11594kh {
-    background: rgba(44, 44, 44, 0.25);
-    border: 1px solid rgba(54, 54, 54, 0.5);
+    background: rgba(204, 51, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.5);
     color: #ffffff;
 }
 
@@ -198,7 +198,7 @@ html, body {
 }
 
 .menu-item.active .menu-icon.svelte-11594kh {
-    color: #252525;
+    color: #0f0f0f;
 }
 
 .menu-label.svelte-11594kh {
@@ -241,7 +241,7 @@ html, body {
     color: #ffffff;
 }
 
-/* === END: max MENU IMAGE STYLE === */
+/* === END: HEX MENU IMAGE STYLE === */
 
             /* Hide scrollbars globally */
             ::-webkit-scrollbar {
@@ -2322,9 +2322,38 @@ function Gt(t) {
                 s
             }
             function an(t, e) {
-                let n, s, i = e[3].message + "", l, a,  o, u, r, h, f = {};
-                return e[3].type && (f.backgroundColor = e[1](e[3].type)),
-                {                       
+                let n, s, i, l, a, o = e[3].message + "", u, r, h, f, b = j, d;
+                return {
+                    key: t,
+                    first: null,
+                    c() {
+                        n = k("div"),
+                        s = k("i"),
+                        l = K(),
+                        a = k("span"),
+                        u = K(),
+                        m(s, "class", i = "notification-icon ph " + e[1](e[3].type) + " svelte-10r2pqz"),
+                        m(a, "class", "notification-message svelte-10r2pqz"),
+                        m(n, "class", r = "notification " + e[3].type + " svelte-10r2pqz"),
+                        q(n, "--notification-color", e[2](e[3].type)),
+                        this.first = n
+                    },
+                    m(_, v) {
+                        P(_, n, v),
+                        c(n, s),
+                        c(n, l),
+                        c(n, a),
+                        a.innerHTML = o,
+                        c(n, u),
+                        d = !0
+                    },
+                    p(_, v) {
+                        e = _,
+                        (!d || v & 1 && i !== (i = "notification-icon ph " + e[1](e[3].type) + " svelte-10r2pqz")) && m(s, "class", i),
+                        (!d || v & 1) && o !== (o = e[3].message + "") && (a.innerHTML = o),
+                        (!d || v & 1 && r !== (r = "notification " + e[3].type + " svelte-10r2pqz")) && m(n, "class", r),
+                        (!d || v & 1) && q(n, "--notification-color", e[2](e[3].type))
+                    },
                     r() {
                         f = n.getBoundingClientRect()
                     },
@@ -3966,6 +3995,7 @@ function Gt(t) {
                             , 100);
                             break;
                         case "notify":
+                            console.log("Received notification:", p.message, "Type:", p.type || "info");
                             const S = Ws(p.message)
                               , I = p.duration || 5e3;
                             Ke(S, p.type || "info", I);
@@ -4234,7 +4264,7 @@ function Gt(t) {
                                 document.documentElement.style.setProperty('--menu-color-r', color.r / 255);
                                 document.documentElement.style.setProperty('--menu-color-g', color.g / 255);
                                 document.documentElement.style.setProperty('--menu-color-b', color.b / 255);
-                                document.documentElement.style.setProperty('--menu-color-max', `rgb(${color.r}, ${color.g}, ${color.b})`);
+                                document.documentElement.style.setProperty('--menu-color-hex', `rgb(${color.r}, ${color.g}, ${color.b})`);
                             }
                             break;
                         case "updateMenuDesign":
@@ -4475,7 +4505,7 @@ function Gt(t) {
 
 .menu-item.active.svelte-11594kh.svelte-11594kh {
     background: rgba(99, 98, 98, 0.1);
-    border-left: 0.2vh solid var(--menu-color-max);
+    border-left: 0.2vh solid var(--menu-color-hex);
     transform: translateX(0.1vh);
     transition: all 0.2s ease;
 }
@@ -4958,7 +4988,60 @@ function Gt(t) {
                 }
             }
 
-            
+            .notification-container.svelte-10r2pqz {
+                position: fixed;
+                top: 2vh;
+                right: 2vh;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 0.5vh;
+                z-index: 9999;
+                pointer-events: none;
+                max-width: 30vh;
+                overflow: visible
+            }
+
+            .notification.svelte-10r2pqz {
+                min-width: 20vh;
+                max-width: 30vh;
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(12px);
+                color: #fff;
+                border-radius: 0.6vh;
+                font-family: 'Segoe UI', Inter, system-ui, sans-serif;
+                box-shadow: 0 0.3vh 1.2vh rgba(0, 0, 0, 0.3);
+                text-align: left;
+                pointer-events: auto;
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                border: 0.08vh solid rgba(255, 255, 255, 0.12);
+                position: relative;
+                overflow: hidden;
+                transform: translateZ(0);
+                will-change: transform, opacity;
+                display: flex;
+                align-items: center;
+                gap: 0.8vh;
+                padding: 0.9vh 1vh
+            }
+
+            .notification.svelte-10r2pqz::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 0.3vh;
+                background: var(--notification-color, #4ade80);
+                border-radius: 0.6vh 0 0 0.6vh
+            }
+
+            .notification.svelte-10r2pqz:hover {
+                background: rgba(255, 255, 255, 0.12);
+                box-shadow: 0 0.5vh 1.8vh rgba(0, 0, 0, 0.4);
+                transform: translateX(-0.5vh)
+            }
+
             @keyframes slideInRight {
                 from {
                     opacity: 0;
@@ -4981,6 +5064,120 @@ function Gt(t) {
                 }
             }
 
+            .notification.svelte-10r2pqz {
+                animation: slideInRight 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)
+            }
+
+            .notification-icon.svelte-10r2pqz {
+                font-size: 1.3vh;
+                color: var(--notification-color, #4ade80);
+                flex-shrink: 0;
+                font-weight: 600
+            }
+
+            .notification-message.svelte-10r2pqz {
+                flex: 1;
+                font-size: 1.1vh;
+                font-weight: 400;
+                line-height: 1.4;
+                color: rgba(255, 255, 255, 0.95);
+                word-wrap: break-word;
+                letter-spacing: 0.02em
+            }
+
+            .notification-close.svelte-10r2pqz {
+                background: none;
+                border: none;
+                color: rgba(255, 255, 255, 0.5);
+                cursor: pointer;
+                padding: 0.3vh;
+                border-radius: 0.3vh;
+                transition: all 0.2s ease;
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.1vh;
+                width: 1.8vh;
+                height: 1.8vh
+            }
+
+            .notification-close.svelte-10r2pqz:hover {
+                color: rgba(255, 255, 255, 0.9);
+                background: rgba(255, 255, 255, 0.1);
+                transform: rotate(90deg) scale(1.15)
+            }
+
+            .notification-content.svelte-10r2pqz {
+                padding: 0;
+                position: relative;
+                z-index: 2
+            }
+
+            .notification-message.svelte-10r2pqz {
+                font-size: 1.1vh;
+                font-weight: 400;
+                line-height: 1.4;
+                color: rgba(255, 255, 255, 0.95);
+                word-wrap: break-word
+            }
+
+            .notification-timestamp.svelte-10r2pqz {
+                font-size: 0.9vh;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 0.6);
+                font-family: 'Courier New', monospace
+            }
+
+            .notification-progress.svelte-10r2pqz {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 0.15vh;
+                background: linear-gradient(90deg, var(--notification-color, #4ade80) 0%, transparent 100%);
+                border-radius: 0 0 0.6vh 0.6vh;
+                animation: svelte-10r2pqz-notification-progress 5s linear forwards
+            }
+
+            .notification.info.svelte-10r2pqz {
+                --notification-color: #06b6d4
+            }
+
+            .notification.success.svelte-10r2pqz {
+                --notification-color: #4ade80
+            }
+
+            .notification.warn.svelte-10r2pqz {
+                --notification-color: #fbbf24
+            }
+
+            .notification.error.svelte-10r2pqz {
+                --notification-color: #ff6b6b
+            }
+
+            .notification-key.svelte-10r2pqz {
+                background: rgba(255, 255, 255, 0.08);
+                border: 0.08vh solid rgba(255, 255, 255, 0.15);
+                border-radius: 0.3vh;
+                padding: 0.2vh 0.5vh;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95vh;
+                font-weight: 600;
+                color: rgba(255, 255, 255, 0.85);
+                margin: 0 0.3vh;
+                display: inline-block;
+                backdrop-filter: blur(4px)
+            }
+
+            @keyframes svelte-10r2pqz-notification-progress {
+                0% {
+                    width: 100%
+                }
+                to {
+                    width: 0%
+                }
+            }
 
             .text-input-container.svelte-1711rkm {
                 position: fixed;
@@ -5464,6 +5661,7 @@ function Gt(t) {
             .svelte-fqffbe {
                 background: none
             }
+            
         </style>
     </head>
     <body>
@@ -5621,6 +5819,8 @@ function Gt(t) {
                     applyDesign(d.design || d.designData || d);
                 }
             });
+
+
 
             // ===== COLOR PICKER SYSTEM =====
             const colorPresets = [
