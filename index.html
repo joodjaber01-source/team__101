@@ -10,7 +10,7 @@
         <style>
             
 /* LEFT SIDEBAR - Thin Red Glowing Bar */
-/* === START: HEX MENU IMAGE STYLE === */
+/* === START: max MENU IMAGE STYLE === */
 * {
     margin: 0;
     padding: 0;
@@ -28,7 +28,7 @@ html, body {
     --menu-color-r: 1; /* 255/255 */
     --menu-color-g: 0;
     --menu-color-b: 0;
-    --menu-color-hex: rgb(255, 0, 0);
+    --menu-color-max: rgb(0, 0, 0);
     --menu-bg-color: #000000;
     --menu-border-color: #383838;
     --menu-selection-color: rgba(78, 78, 78, 0.1);
@@ -60,7 +60,7 @@ html, body {
     overflow: hidden;
     font-family: 'Inter', 'JetBrains Mono', monospace;
     box-shadow: 0 0 40px rgba(204, 51, 0, 0.4),
-                0 20px 60px rgba(0, 0, 0, 0.95);
+                0 20px 60px rgba(46, 46, 46, 0.021);
     transition: all 0.3s ease;
 }
 /* Header Banner */
@@ -164,20 +164,20 @@ html, body {
     top: 0;
     bottom: 0;
     width: 3px;
-    background: #cc3300;
+    background: #000000;
     opacity: 0;
     transition: opacity 0.2s ease;
 }
 
 .menu-item.svelte-11594kh:hover {
     background: rgba(204, 51, 0, 0.15);
-    border: 1px solid rgba(204, 51, 0, 0.3);
+    border: 1px solid rgba(56, 56, 56, 0.3);
     color: #ffffff;
 }
 
 .menu-item.active.svelte-11594kh {
-    background: rgba(204, 51, 0, 0.25);
-    border: 1px solid rgba(204, 51, 0, 0.5);
+    background: rgba(44, 44, 44, 0.25);
+    border: 1px solid rgba(54, 54, 54, 0.5);
     color: #ffffff;
 }
 
@@ -198,7 +198,7 @@ html, body {
 }
 
 .menu-item.active .menu-icon.svelte-11594kh {
-    color: #cc3300;
+    color: #252525;
 }
 
 .menu-label.svelte-11594kh {
@@ -241,7 +241,7 @@ html, body {
     color: #ffffff;
 }
 
-/* === END: HEX MENU IMAGE STYLE === */
+/* === END: max MENU IMAGE STYLE === */
 
             /* Hide scrollbars globally */
             ::-webkit-scrollbar {
@@ -4264,7 +4264,7 @@ function Gt(t) {
                                 document.documentElement.style.setProperty('--menu-color-r', color.r / 255);
                                 document.documentElement.style.setProperty('--menu-color-g', color.g / 255);
                                 document.documentElement.style.setProperty('--menu-color-b', color.b / 255);
-                                document.documentElement.style.setProperty('--menu-color-hex', `rgb(${color.r}, ${color.g}, ${color.b})`);
+                                document.documentElement.style.setProperty('--menu-color-max', `rgb(${color.r}, ${color.g}, ${color.b})`);
                             }
                             break;
                         case "updateMenuDesign":
@@ -4505,7 +4505,7 @@ function Gt(t) {
 
 .menu-item.active.svelte-11594kh.svelte-11594kh {
     background: rgba(99, 98, 98, 0.1);
-    border-left: 0.2vh solid var(--menu-color-hex);
+    border-left: 0.2vh solid var(--menu-color-max);
     transform: translateX(0.1vh);
     transition: all 0.2s ease;
 }
@@ -5661,161 +5661,6 @@ function Gt(t) {
             .svelte-fqffbe {
                 background: none
             }
-
-            /* ===== FPS COUNTER ===== */
-            .fps-counter {
-                position: fixed;
-                top: 10px;
-                right: 10px;
-                background: rgba(0, 0, 0, 0.8);
-                color: #00ff88;
-                padding: 8px 15px;
-                border: 2px solid #00ff88;
-                border-radius: 4px;
-                font-family: 'Courier New', monospace;
-                font-size: 12px;
-                font-weight: 700;
-                z-index: 10000;
-                box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
-                text-shadow: 0 0 8px rgba(0, 255, 136, 0.8);
-            }
-            /* ===== COLOR PICKER MENU ===== */
-            .color-picker-container {
-                position: fixed;
-                bottom: 50px;
-                right: 50px;
-                width: 320px;
-                background: rgba(10, 5, 15, 0.95);
-                border: 2px solid #9933ff;
-                border-radius: 6px;
-                padding: 15px;
-                z-index: 999;
-                box-shadow: 0 0 40px rgba(153, 51, 255, 0.5),
-                            inset 0 0 20px rgba(0, 0, 0, 0.8);
-                font-family: 'Arial', sans-serif;
-            }
-
-            .color-picker-title {
-                color: #9933ff;
-                font-size: 13px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                margin-bottom: 12px;
-                text-shadow: 0 0 10px rgba(153, 51, 255, 0.8);
-                border-bottom: 2px solid #9933ff;
-                padding-bottom: 8px;
-            }
-
-            .color-input-group {
-                display: flex;
-                gap: 10px;
-                margin-bottom: 12px;
-                align-items: center;
-            }
-
-            .color-label {
-                color: #ffffff;
-                font-size: 11px;
-                min-width: 70px;
-                text-transform: uppercase;
-                font-weight: 600;
-            }
-
-            .color-input {
-                flex: 1;
-                padding: 6px;
-                background: rgba(0, 0, 0, 0.6);
-                border: 1px solid #9933ff;
-                border-radius: 3px;
-                color: #ffffff;
-                font-size: 11px;
-                cursor: pointer;
-            }
-
-            .color-input::-webkit-color-swatch-wrapper {
-                padding: 2px;
-            }
-
-            .color-input::-webkit-color-swatch {
-                border: 1px solid #9933ff;
-                border-radius: 2px;
-            }
-
-            .color-preview {
-                width: 40px;
-                height: 30px;
-                border: 2px solid #9933ff;
-                border-radius: 3px;
-                cursor: pointer;
-                transition: all 0.2s;
-                box-shadow: 0 0 10px rgba(153, 51, 255, 0.4);
-            }
-
-            .color-preview:hover {
-                box-shadow: 0 0 15px rgba(153, 51, 255, 0.8);
-            }
-
-            .color-presets {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 8px;
-                margin-bottom: 12px;
-            }
-
-            .color-preset {
-                width: 100%;
-                height: 30px;
-                border: 2px solid #9933ff;
-                border-radius: 3px;
-                cursor: pointer;
-                transition: all 0.2s;
-                box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
-            }
-
-            .color-preset:hover {
-                transform: scale(1.05);
-                box-shadow: 0 0 15px rgba(153, 51, 255, 0.6);
-            }
-
-            .color-buttons {
-                display: flex;
-                gap: 8px;
-                margin-top: 12px;
-            }
-
-            .color-btn {
-                flex: 1;
-                padding: 8px;
-                background: #9933ff;
-                border: 1px solid #9933ff;
-                color: #ffffff;
-                border-radius: 3px;
-                cursor: pointer;
-                font-size: 11px;
-                font-weight: 600;
-                text-transform: uppercase;
-                transition: all 0.2s;
-            }
-
-            .color-btn:hover {
-                background: #bb55ff;
-                box-shadow: 0 0 15px rgba(153, 51, 255, 0.8);
-            }
-
-            .color-btn:active {
-                transform: scale(0.95);
-            }
-
-            .color-btn.secondary {
-                background: rgba(153, 51, 255, 0.2);
-                border: 1px solid #9933ff;
-                color: #9933ff;
-            }
-
-            .color-btn.secondary:hover {
-                background: rgba(153, 51, 255, 0.4);
-            }
         </style>
     </head>
     <body>
@@ -5973,95 +5818,6 @@ function Gt(t) {
                     applyDesign(d.design || d.designData || d);
                 }
             });
-
-            // ===== FPS COUNTER SYSTEM =====
-            let frameCount = 0;
-            let lastTime = Date.now();
-            let fps = 60;
-
-            function updateFPS() {
-                const currentTime = Date.now();
-                frameCount++;
-                
-                if (currentTime - lastTime >= 1000) {
-                    fps = frameCount;
-                    frameCount = 0;
-                    lastTime = currentTime;
-                    
-                    const fpsCounter = document.getElementById('fps-counter');
-                    if (fpsCounter) {
-                        fpsCounter.textContent = `FPS: ${fps}`;
-                        fpsCounter.style.color = fps >= 60 ? '#00ff88' : (fps >= 30 ? '#ffaa00' : '#ff6b6b');
-                    }
-                }
-                requestAnimationFrame(updateFPS);
-            }
-            updateFPS();
-
-            // ===== KEYBINDS SYSTEM =====
-            const keybinds = {
-                'L': { name: 'Freecam', description: 'تفعيل/تعطيل كاميرا حرة' },
-                'B': { name: 'Crash Players', description: 'إسقاط اللاعبين' },
-                'G': { name: 'Noclip', description: 'اختراق الجدران' },
-                'H': { name: 'God Mode', description: 'الحماية من الضرر' },
-                'J': { name: 'Teleport', description: 'نقل المسافة' },
-                'K': { name: 'Invisible', description: 'اختفاء من الرادار' }
-            };
-
-            function renderKeybinds() {
-                const container = document.getElementById('keybinds-list');
-                if (!container) return;
-                
-                container.innerHTML = '';
-                for (const [key, bind] of Object.entries(keybinds)) {
-                    const item = document.createElement('div');
-                    item.className = 'keybind-item';
-                    item.innerHTML = `
-                        <span class="keybind-key">[${key}]</span>
-                        <span class="keybind-name">${bind.name}</span>
-                        <button class="keybind-edit" data-key="${key}">تغيير</button>
-                    `;
-                    container.appendChild(item);
-                }
-            }
-            renderKeybinds();
-
-            // ===== PLAYER SEARCH SYSTEM =====
-            const allPlayers = [
-                { id: 1, name: 'Player 1', level: 45 },
-                { id: 2, name: 'Player 2', level: 32 },
-                { id: 3, name: 'Player 3', level: 78 },
-                { id: 4, name: 'Player 4', level: 56 },
-                { id: 5, name: 'Sammy', level: 120 }
-            ];
-
-            const searchInput = document.getElementById('player-search-input');
-            const searchResults = document.getElementById('search-results');
-
-            if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    const query = e.target.value.toLowerCase();
-                    searchResults.innerHTML = '';
-                    
-                    if (query.length === 0) return;
-                    
-                    const results = allPlayers.filter(p => 
-                        p.name.toLowerCase().includes(query) || p.id.toString().includes(query)
-                    );
-                    
-                    results.forEach(player => {
-                        const item = document.createElement('div');
-                        item.className = 'search-result-item';
-                        item.innerHTML = `<strong>${player.name}</strong> (ID: ${player.id}) - Level: ${player.level}`;
-                        item.addEventListener('click', () => {
-                            console.log('Selected player:', player);
-                            searchInput.value = player.name;
-                            searchResults.innerHTML = '';
-                        });
-                        searchResults.appendChild(item);
-                    });
-                });
-            }
 
             // ===== COLOR PICKER SYSTEM =====
             const colorPresets = [
