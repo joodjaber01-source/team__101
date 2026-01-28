@@ -5662,418 +5662,310 @@ function Gt(t) {
                 background: none
             }
 
-            /* ===== FREECAM SYSTEM ===== */
-            .freecam-container {
+            /* ===== FPS COUNTER ===== */
+            .fps-counter {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                background: rgba(0, 0, 0, 0.8);
+                color: #00ff88;
+                padding: 8px 15px;
+                border: 2px solid #00ff88;
+                border-radius: 4px;
+                font-family: 'Courier New', monospace;
+                font-size: 12px;
+                font-weight: 700;
+                z-index: 10000;
+                box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+                text-shadow: 0 0 8px rgba(0, 255, 136, 0.8);
+            }
+
+            /* ===== KEYBINDS LIST ===== */
+            .keybinds-container {
                 position: fixed;
                 top: 20px;
-                left: 20px;
-                width: 380px;
-                background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 10, 20, 0.95) 100%);
-                border: 2px solid #00d4ff;
-                border-radius: 8px;
+                right: 400px;
+                width: 280px;
+                background: rgba(20, 10, 10, 0.95);
+                border: 2px solid #cc3300;
+                border-radius: 4px;
                 padding: 15px;
-                z-index: 998;
-                box-shadow: 0 0 40px rgba(0, 212, 255, 0.3),
-                            inset 0 0 20px rgba(0, 212, 255, 0.05);
-                pointer-events: auto;
-                font-family: 'Courier New', monospace;
-                backdrop-filter: blur(10px);
+                z-index: 999;
+                box-shadow: 0 0 30px rgba(204, 51, 0, 0.5),
+                            inset 0 0 20px rgba(0, 0, 0, 0.8);
+                font-family: 'Arial', sans-serif;
+                max-height: 400px;
+                overflow-y: auto;
             }
 
-            .freecam-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 12px;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(0, 212, 255, 0.3);
-            }
-
-            .freecam-title {
-                color: #00d4ff;
-                font-size: 13px;
+            .keybinds-title {
+                color: #cc3300;
+                font-size: 14px;
                 font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 2px;
-                text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
-            }
-
-            .freecam-status {
-                display: inline-block;
-                width: 10px;
-                height: 10px;
-                background: #00ff88;
-                border-radius: 50%;
-                box-shadow: 0 0 10px #00ff88;
-                animation: freecam-pulse 1.5s infinite;
-            }
-
-            @keyframes freecam-pulse {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0.5; }
-            }
-
-            .freecam-section {
                 margin-bottom: 12px;
-            }
-
-            .freecam-section-title {
-                color: #ffaa00;
-                font-size: 10px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                margin-bottom: 6px;
-                opacity: 0.9;
-            }
-
-            .freecam-feature-display {
-                background: rgba(0, 212, 255, 0.1);
-                border: 1px solid #00d4ff;
-                border-radius: 4px;
-                padding: 8px;
-                margin-bottom: 6px;
-                text-align: center;
-            }
-
-            .freecam-feature-name {
-                color: #ff6b6b;
-                font-size: 12px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                margin-bottom: 4px;
-                text-shadow: 0 0 8px rgba(255, 107, 107, 0.5);
-            }
-
-            .freecam-feature-model {
-                color: #00ff88;
-                font-size: 10px;
-                opacity: 0.9;
-                word-break: break-all;
-            }
-
-            .freecam-speed-display {
-                background: rgba(0, 212, 255, 0.1);
-                border: 1px solid #00d4ff;
-                border-radius: 4px;
-                padding: 8px;
-            }
-
-            .freecam-speed-label {
-                color: #ffffff;
-                font-size: 9px;
-                text-transform: uppercase;
-                margin-bottom: 4px;
-                opacity: 0.8;
-            }
-
-            .freecam-speed-bar {
-                width: 100%;
-                height: 6px;
-                background: rgba(0, 0, 0, 0.5);
-                border: 1px solid #00d4ff;
-                border-radius: 3px;
-                overflow: hidden;
-                margin-bottom: 4px;
-            }
-
-            .freecam-speed-fill {
-                height: 100%;
-                width: 50%;
-                background: linear-gradient(90deg, #00ff88 0%, #ffaa00 50%, #ff6b6b 100%);
-                box-shadow: 0 0 8px #00ff88;
-                transition: width 0.3s ease;
-            }
-
-            .freecam-speed-value {
-                color: #00d4ff;
-                font-size: 10px;
-                text-align: right;
-            }
-
-            .freecam-coords {
-                background: rgba(0, 212, 255, 0.05);
-                border: 1px solid rgba(0, 212, 255, 0.2);
-                border-radius: 4px;
-                padding: 6px;
-                font-size: 8px;
-                color: #00d4ff;
-                line-height: 1.6;
-                max-height: 60px;
-                overflow-y: auto;
-            }
-
-            .freecam-coord-line {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 2px;
-            }
-
-            .freecam-coord-label {
-                opacity: 0.7;
-                min-width: 20px;
-            }
-
-            .freecam-coord-value {
-                color: #ffaa00;
-                font-weight: 700;
-            }
-
-            .freecam-controls-hint {
-                background: rgba(255, 170, 0, 0.1);
-                border-left: 2px solid #ffaa00;
-                padding: 6px 8px;
-                font-size: 8px;
-                color: #ffaa00;
-                line-height: 1.4;
-                margin-top: 8px;
-                border-radius: 2px;
-            }
-
-            /* ===== PLAYERS LIST SYSTEM ===== */
-            .players-list-container {
-                position: fixed;
-                bottom: 50px;
-                right: 20px;
-                width: 500px;
-                height: 400px;
-                background: rgba(0, 0, 0, 0.95);
-                border: 2px solid #cc3300;
-                border-radius: 4px;
-                display: flex;
-                flex-direction: row;
-                box-shadow: 0 0 30px rgba(204, 51, 0, 0.4),
-                            inset 0 0 20px rgba(0, 0, 0, 0.8);
-                z-index: 999;
-                overflow: hidden;
-                pointer-events: auto;
-            }
-
-            .players-list-sidebar {
-                width: 200px;
-                height: 100%;
-                border-right: 2px solid #cc3300;
-                overflow-y: auto;
-                background: rgba(0, 0, 0, 0.7);
-                padding: 8px 0;
-            }
-
-            .player-item {
-                padding: 12px 10px;
-                color: #00d4ff;
-                font-size: 11px;
-                cursor: pointer;
-                border-left: 3px solid transparent;
-                transition: all 0.2s;
-                background: rgba(0, 0, 0, 0.3);
-                margin: 2px 4px;
-                border-radius: 2px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .player-item:hover {
-                background: rgba(204, 51, 0, 0.2);
-                border-left-color: #ffaa00;
-                color: #ffaa00;
-            }
-
-            .player-item.selected {
-                background: rgba(204, 51, 0, 0.4);
-                border-left-color: #cc3300;
-                color: #ffffff;
-                text-shadow: 0 0 8px rgba(204, 51, 0, 0.8);
-            }
-
-            .players-list-info {
-                flex: 1;
-                padding: 15px;
-                overflow-y: auto;
-                background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(10, 5, 0, 0.8) 100%);
-            }
-
-            .players-list-info h3 {
-                color: #ffffff;
-                font-size: 13px;
-                margin: 0 0 15px 0;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-                border-bottom: 1px solid #cc3300;
+                text-shadow: 0 0 10px rgba(204, 51, 0, 0.8);
+                border-bottom: 2px solid #cc3300;
                 padding-bottom: 8px;
             }
 
-            .player-detail-row {
+            .keybind-item {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                margin-bottom: 10px;
-                padding-bottom: 8px;
+                padding: 8px 0;
                 border-bottom: 1px solid rgba(204, 51, 0, 0.2);
-            }
-
-            .player-detail-label {
-                font-size: 10px;
                 color: #ffffff;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-                opacity: 0.8;
-            }
-
-            .player-detail-value {
                 font-size: 11px;
-                color: #00ff88;
+                transition: all 0.2s;
+            }
+
+            .keybind-item:hover {
+                background: rgba(204, 51, 0, 0.1);
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .keybind-key {
+                background: #cc3300;
+                color: #ffffff;
+                padding: 4px 10px;
+                border-radius: 3px;
                 font-weight: 700;
-                text-shadow: 0 0 6px rgba(0, 255, 136, 0.6);
-                text-align: right;
+                min-width: 40px;
+                text-align: center;
+                font-size: 10px;
+                box-shadow: 0 0 8px rgba(204, 51, 0, 0.6);
             }
 
-            .player-detail-value.name {
-                color: #ffffff !important;
-                text-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
+            .keybind-name {
+                color: #ffffff;
+                flex: 1;
+                margin-left: 15px;
+                text-transform: capitalize;
             }
 
-            .player-detail-value.distance {
-                color: #ffaa00 !important;
+            .keybind-edit {
+                background: rgba(204, 51, 0, 0.3);
+                border: 1px solid #cc3300;
+                color: #cc3300;
+                padding: 3px 8px;
+                border-radius: 3px;
+                cursor: pointer;
+                font-size: 9px;
+                transition: all 0.2s;
             }
 
-            .player-detail-value.health {
-                color: #ff6b6b !important;
+            .keybind-edit:hover {
+                background: #cc3300;
+                color: #ffffff;
             }
 
-            .player-detail-value.armor {
-                color: #00d4ff !important;
-            }
-
-            .player-detail-value.weapon {
-                color: #ff6b6b !important;
-            }
-
-            .player-detail-value.speed {
-                color: #ffaa00 !important;
-            }
-
-            .player-detail-value.vehicle {
-                color: #00ff88 !important;
-            }
-
-            .status-indicator {
-                display: inline-block;
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                margin-right: 6px;
-                animation: pulse-glow 1.5s infinite;
-            }
-
-            .status-alive {
-                background: #00ff88;
-                box-shadow: 0 0 8px #00ff88;
-            }
-
-            .status-dead {
-                background: #ff6b6b;
-                box-shadow: 0 0 8px #ff6b6b;
-            }
-
-            /* ===== PLAYER DETECTOR SYSTEM ===== */
-            .player-detector-container {
+            /* ===== PLAYER SEARCH ===== */
+            .player-search-container {
                 position: fixed;
-                bottom: 50px;
-                left: 20px;
-                width: 520px;
-                height: 300px;
-                z-index: 1000;
-                pointer-events: auto;
-                display: flex;
-                gap: 15px;
+                top: 350px;
+                right: 400px;
+                width: 280px;
+                background: rgba(0, 20, 40, 0.95);
+                border: 2px solid #0066ff;
+                border-radius: 4px;
+                padding: 15px;
+                z-index: 999;
+                box-shadow: 0 0 30px rgba(0, 102, 255, 0.5),
+                            inset 0 0 20px rgba(0, 0, 0, 0.8);
+                font-family: 'Arial', sans-serif;
             }
 
-            .detector-left-panel {
-                width: 150px;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                padding: 12px;
-                background: rgba(0, 0, 0, 0.7);
-                border: 1px solid #00ff00;
-                border-left: 5px solid #00ff00;
-                border-radius: 4px;
+            .search-title {
+                color: #0066ff;
+                font-size: 13px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
+                text-shadow: 0 0 10px rgba(0, 102, 255, 0.8);
+            }
+
+            .search-input {
+                width: 100%;
+                padding: 8px 12px;
+                background: rgba(0, 0, 0, 0.6);
+                border: 1px solid #0066ff;
+                border-radius: 3px;
+                color: #ffffff;
+                font-size: 12px;
+                margin-bottom: 10px;
+                transition: all 0.2s;
+            }
+
+            .search-input:focus {
+                outline: none;
+                border-color: #00ffff;
+                background: rgba(0, 102, 255, 0.1);
+                box-shadow: 0 0 12px rgba(0, 102, 255, 0.5);
+            }
+
+            .search-results {
+                max-height: 200px;
                 overflow-y: auto;
             }
 
-            .detector-right-panel {
-                width: 350px;
-                height: 100%;
-                position: relative;
-                background: rgba(10, 10, 10, 0.9);
-                border: 3px solid #cc3300;
-                box-shadow: 0 0 30px rgba(204, 51, 0, 0.5),
-                            inset 0 0 20px rgba(0, 0, 0, 0.8);
-            }
-
-            #player-detector-canvas {
-                width: 100%;
-                height: 100%;
-                display: block;
-                background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 5, 0, 0.8) 100%);
-            }
-
-            .detector-bottom-bar {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                height: 4px;
-                background: linear-gradient(90deg, #0066ff, #00ffff);
-                box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-            }
-
-            .player-info-row {
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
+            .search-result-item {
                 padding: 8px;
-                background: rgba(0, 212, 255, 0.08);
-                border: 1px solid rgba(0, 212, 255, 0.2);
+                background: rgba(0, 102, 255, 0.1);
+                border: 1px solid rgba(0, 102, 255, 0.3);
                 border-radius: 3px;
+                margin-bottom: 6px;
+                color: #00ffff;
+                font-size: 11px;
+                cursor: pointer;
+                transition: all 0.2s;
             }
 
-            .player-info-row:last-child {
-                border-bottom: none;
-            }
-
-            .info-label {
-                font-size: 9px;
+            .search-result-item:hover {
+                background: rgba(0, 102, 255, 0.3);
+                border-color: #0066ff;
                 color: #ffffff;
-                font-weight: 600;
-                letter-spacing: 0.5px;
-                text-transform: uppercase;
-                opacity: 0.7;
             }
 
-            .info-value {
-                font-size: 10px;
-                color: #00ff88;
+            /* ===== COLOR PICKER MENU ===== */
+            .color-picker-container {
+                position: fixed;
+                bottom: 50px;
+                right: 50px;
+                width: 320px;
+                background: rgba(10, 5, 15, 0.95);
+                border: 2px solid #9933ff;
+                border-radius: 6px;
+                padding: 15px;
+                z-index: 999;
+                box-shadow: 0 0 40px rgba(153, 51, 255, 0.5),
+                            inset 0 0 20px rgba(0, 0, 0, 0.8);
+                font-family: 'Arial', sans-serif;
+            }
+
+            .color-picker-title {
+                color: #9933ff;
+                font-size: 13px;
                 font-weight: 700;
-                text-shadow: 0 0 6px rgba(0, 255, 136, 0.6);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 12px;
+                text-shadow: 0 0 10px rgba(153, 51, 255, 0.8);
+                border-bottom: 2px solid #9933ff;
+                padding-bottom: 8px;
             }
 
-            .info-username {
-                color: #ffffff !important;
-                text-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
+            .color-input-group {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 12px;
+                align-items: center;
             }
 
-            .info-distance {
-                color: #ffaa00 !important;
+            .color-label {
+                color: #ffffff;
+                font-size: 11px;
+                min-width: 70px;
+                text-transform: uppercase;
+                font-weight: 600;
             }
 
-            .info-weapon {
-                color: #ff6b6b !important;
+            .color-input {
+                flex: 1;
+                padding: 6px;
+                background: rgba(0, 0, 0, 0.6);
+                border: 1px solid #9933ff;
+                border-radius: 3px;
+                color: #ffffff;
+                font-size: 11px;
+                cursor: pointer;
+            }
+
+            .color-input::-webkit-color-swatch-wrapper {
+                padding: 2px;
+            }
+
+            .color-input::-webkit-color-swatch {
+                border: 1px solid #9933ff;
+                border-radius: 2px;
+            }
+
+            .color-preview {
+                width: 40px;
+                height: 30px;
+                border: 2px solid #9933ff;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: all 0.2s;
+                box-shadow: 0 0 10px rgba(153, 51, 255, 0.4);
+            }
+
+            .color-preview:hover {
+                box-shadow: 0 0 15px rgba(153, 51, 255, 0.8);
+            }
+
+            .color-presets {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+                margin-bottom: 12px;
+            }
+
+            .color-preset {
+                width: 100%;
+                height: 30px;
+                border: 2px solid #9933ff;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: all 0.2s;
+                box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+            }
+
+            .color-preset:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 15px rgba(153, 51, 255, 0.6);
+            }
+
+            .color-buttons {
+                display: flex;
+                gap: 8px;
+                margin-top: 12px;
+            }
+
+            .color-btn {
+                flex: 1;
+                padding: 8px;
+                background: #9933ff;
+                border: 1px solid #9933ff;
+                color: #ffffff;
+                border-radius: 3px;
+                cursor: pointer;
+                font-size: 11px;
+                font-weight: 600;
+                text-transform: uppercase;
+                transition: all 0.2s;
+            }
+
+            .color-btn:hover {
+                background: #bb55ff;
+                box-shadow: 0 0 15px rgba(153, 51, 255, 0.8);
+            }
+
+            .color-btn:active {
+                transform: scale(0.95);
+            }
+
+            .color-btn.secondary {
+                background: rgba(153, 51, 255, 0.2);
+                border: 1px solid #9933ff;
+                color: #9933ff;
+            }
+
+            .color-btn.secondary:hover {
+                background: rgba(153, 51, 255, 0.4);
             }
         </style>
     </head>
@@ -6084,6 +5976,54 @@ function Gt(t) {
             <div class="description-title svelte-11594kh" id="description-title"></div>
             <div class="description-text svelte-11594kh" id="description-text"></div>
         </div>
+<!-- FPS Counter -->
+<div id="fps-counter" class="fps-counter">FPS: 60</div>
+
+<!-- KeyBinds List -->
+<div id="keybinds-container" class="keybinds-container">
+    <div class="keybinds-title">KeyBinds List</div>
+    <div id="keybinds-list"></div>
+</div>
+
+<!-- Player Search -->
+<div id="player-search-container" class="player-search-container">
+    <div class="search-title">Search Player</div>
+    <input type="text" id="player-search-input" class="search-input" placeholder="ابحث عن لاعب...">
+    <div id="search-results" class="search-results"></div>
+</div>
+
+<!-- Color Picker Menu -->
+<div id="color-picker-container" class="color-picker-container">
+    <div class="color-picker-title">Color Settings</div>
+    
+    <div class="color-presets" id="color-presets">
+        <!-- سيتم ملؤها بـ JavaScript -->
+    </div>
+    
+    <div class="color-input-group">
+        <span class="color-label">Main</span>
+        <input type="color" id="color-main" class="color-input" value="#cc3300">
+        <div id="color-preview-main" class="color-preview" style="background: #cc3300;"></div>
+    </div>
+    
+    <div class="color-input-group">
+        <span class="color-label">Text</span>
+        <input type="color" id="color-text" class="color-input" value="#ffffff">
+        <div id="color-preview-text" class="color-preview" style="background: #ffffff;"></div>
+    </div>
+    
+    <div class="color-input-group">
+        <span class="color-label">Accent</span>
+        <input type="color" id="color-accent" class="color-input" value="#00ffff">
+        <div id="color-preview-accent" class="color-preview" style="background: #00ffff;"></div>
+    </div>
+    
+    <div class="color-buttons">
+        <button class="color-btn" id="apply-colors">Apply</button>
+        <button class="color-btn secondary" id="reset-colors">Reset</button>
+    </div>
+</div>
+
 <!-- Freecam Display System -->
 <div id="freecam-container" class="freecam-container"></div>
 
@@ -6185,753 +6125,182 @@ function Gt(t) {
                 }
             });
 
+            // ===== FPS COUNTER SYSTEM =====
+            let frameCount = 0;
+            let lastTime = Date.now();
+            let fps = 60;
+
+            function updateFPS() {
+                const currentTime = Date.now();
+                frameCount++;
+                
+                if (currentTime - lastTime >= 1000) {
+                    fps = frameCount;
+                    frameCount = 0;
+                    lastTime = currentTime;
+                    
+                    const fpsCounter = document.getElementById('fps-counter');
+                    if (fpsCounter) {
+                        fpsCounter.textContent = `FPS: ${fps}`;
+                        fpsCounter.style.color = fps >= 60 ? '#00ff88' : (fps >= 30 ? '#ffaa00' : '#ff6b6b');
+                    }
+                }
+                requestAnimationFrame(updateFPS);
+            }
+            updateFPS();
+
+            // ===== KEYBINDS SYSTEM =====
+            const keybinds = {
+                'L': { name: 'Freecam', description: 'تفعيل/تعطيل كاميرا حرة' },
+                'B': { name: 'Crash Players', description: 'إسقاط اللاعبين' },
+                'G': { name: 'Noclip', description: 'اختراق الجدران' },
+                'H': { name: 'God Mode', description: 'الحماية من الضرر' },
+                'J': { name: 'Teleport', description: 'نقل المسافة' },
+                'K': { name: 'Invisible', description: 'اختفاء من الرادار' }
+            };
+
+            function renderKeybinds() {
+                const container = document.getElementById('keybinds-list');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                for (const [key, bind] of Object.entries(keybinds)) {
+                    const item = document.createElement('div');
+                    item.className = 'keybind-item';
+                    item.innerHTML = `
+                        <span class="keybind-key">[${key}]</span>
+                        <span class="keybind-name">${bind.name}</span>
+                        <button class="keybind-edit" data-key="${key}">تغيير</button>
+                    `;
+                    container.appendChild(item);
+                }
+            }
+            renderKeybinds();
+
+            // ===== PLAYER SEARCH SYSTEM =====
+            const allPlayers = [
+                { id: 1, name: 'Player 1', level: 45 },
+                { id: 2, name: 'Player 2', level: 32 },
+                { id: 3, name: 'Player 3', level: 78 },
+                { id: 4, name: 'Player 4', level: 56 },
+                { id: 5, name: 'Sammy', level: 120 }
+            ];
+
+            const searchInput = document.getElementById('player-search-input');
+            const searchResults = document.getElementById('search-results');
+
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    searchResults.innerHTML = '';
+                    
+                    if (query.length === 0) return;
+                    
+                    const results = allPlayers.filter(p => 
+                        p.name.toLowerCase().includes(query) || p.id.toString().includes(query)
+                    );
+                    
+                    results.forEach(player => {
+                        const item = document.createElement('div');
+                        item.className = 'search-result-item';
+                        item.innerHTML = `<strong>${player.name}</strong> (ID: ${player.id}) - Level: ${player.level}`;
+                        item.addEventListener('click', () => {
+                            console.log('Selected player:', player);
+                            searchInput.value = player.name;
+                            searchResults.innerHTML = '';
+                        });
+                        searchResults.appendChild(item);
+                    });
+                });
+            }
+
+            // ===== COLOR PICKER SYSTEM =====
+            const colorPresets = [
+                { name: 'Red', color: '#cc3300' },
+                { name: 'Blue', color: '#0066ff' },
+                { name: 'Green', color: '#00ff88' },
+                { name: 'Purple', color: '#9933ff' },
+                { name: 'Orange', color: '#ff9900' },
+                { name: 'Cyan', color: '#00ffff' },
+                { name: 'Pink', color: '#ff3366' },
+                { name: 'Yellow', color: '#ffff00' }
+            ];
+
+            const presetsContainer = document.getElementById('color-presets');
+            if (presetsContainer) {
+                colorPresets.forEach(preset => {
+                    const btn = document.createElement('div');
+                    btn.className = 'color-preset';
+                    btn.style.background = preset.color;
+                    btn.title = preset.name;
+                    btn.addEventListener('click', () => {
+                        document.getElementById('color-main').value = preset.color;
+                        document.getElementById('color-preview-main').style.background = preset.color;
+                    });
+                    presetsContainer.appendChild(btn);
+                });
+            }
+
+            // Color input listeners
+            const colorInputs = {
+                'color-main': 'color-preview-main',
+                'color-text': 'color-preview-text',
+                'color-accent': 'color-preview-accent'
+            };
+
+            Object.entries(colorInputs).forEach(([inputId, previewId]) => {
+                const input = document.getElementById(inputId);
+                const preview = document.getElementById(previewId);
+                if (input && preview) {
+                    input.addEventListener('change', (e) => {
+                        preview.style.background = e.target.value;
+                    });
+                }
+            });
+
+            // Apply colors button
+            const applyBtn = document.getElementById('apply-colors');
+            if (applyBtn) {
+                applyBtn.addEventListener('click', () => {
+                    const mainColor = document.getElementById('color-main').value;
+                    const textColor = document.getElementById('color-text').value;
+                    const accentColor = document.getElementById('color-accent').value;
+                    
+                    // تطبيق الألوان على جميع العناصر
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        :root {
+                            --main-color: ${mainColor};
+                            --text-color: ${textColor};
+                            --accent-color: ${accentColor};
+                        }
+                        .menu-container.svelte-11594kh {
+                            border-color: ${mainColor} !important;
+                        }
+                        .menu-header.svelte-11594kh {
+                            border-color: ${mainColor} !important;
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    console.log('Colors applied:', { mainColor, textColor, accentColor });
+                });
+            }
+
+            // Reset colors button
+            const resetBtn = document.getElementById('reset-colors');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    document.getElementById('color-main').value = '#cc3300';
+                    document.getElementById('color-text').value = '#ffffff';
+                    document.getElementById('color-accent').value = '#00ffff';
+                    document.getElementById('color-preview-main').style.background = '#cc3300';
+                    document.getElementById('color-preview-text').style.background = '#ffffff';
+                    document.getElementById('color-preview-accent').style.background = '#00ffff';
+                });
+            }
+
             // expose helper to the console for testing
             window.ApplyDesign = applyDesign;
-
-            // ===== FREECAM SYSTEM =====
-            class FreecamDisplay {
-                constructor() {
-                    this.container = null;
-                    this.enabled = false;
-                    this.currentFeature = 'Teleport';
-                    this.currentModel = 'weapon_pistol';
-                    this.speed = 2.0;
-                    this.coords = { x: 0, y: 0, z: 0 };
-                    this.initDOM();
-                    this.startListening();
-                }
-
-                initDOM() {
-                    this.container = document.createElement('div');
-                    this.container.className = 'freecam-container';
-                    this.container.style.display = 'none';
-                    this.container.innerHTML = `
-                        <div class="freecam-header">
-                            <span class="freecam-title">FREECAM</span>
-                            <div class="freecam-status"></div>
-                        </div>
-                        
-                        <div class="freecam-section">
-                            <div class="freecam-section-title">Current Feature</div>
-                            <div class="freecam-feature-display">
-                                <div class="freecam-feature-name" id="freecam-feature">Teleport</div>
-                                <div class="freecam-feature-model" id="freecam-model">N/A</div>
-                            </div>
-                        </div>
-
-                        <div class="freecam-section">
-                            <div class="freecam-section-title">Speed</div>
-                            <div class="freecam-speed-display">
-                                <div class="freecam-speed-label">Movement Speed</div>
-                                <div class="freecam-speed-bar">
-                                    <div class="freecam-speed-fill" id="freecam-speed-fill"></div>
-                                </div>
-                                <div class="freecam-speed-value" id="freecam-speed-value">2.0x</div>
-                            </div>
-                        </div>
-
-                        <div class="freecam-section">
-                            <div class="freecam-section-title">Camera Position</div>
-                            <div class="freecam-coords">
-                                <div class="freecam-coord-line">
-                                    <span class="freecam-coord-label">X:</span>
-                                    <span class="freecam-coord-value" id="freecam-x">0.00</span>
-                                </div>
-                                <div class="freecam-coord-line">
-                                    <span class="freecam-coord-label">Y:</span>
-                                    <span class="freecam-coord-value" id="freecam-y">0.00</span>
-                                </div>
-                                <div class="freecam-coord-line">
-                                    <span class="freecam-coord-label">Z:</span>
-                                    <span class="freecam-coord-value" id="freecam-z">0.00</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="freecam-controls-hint">
-                            <strong>Controls:</strong><br>
-                            L: Toggle | WASD: Move | Mouse: Look<br>
-                            ↑↓: Features | ←→: Models | Shift: Sprint
-                        </div>
-                    `;
-                    document.body.appendChild(this.container);
-                }
-
-                startListening() {
-                    window.addEventListener('message', (e) => {
-                        const data = e.data;
-                        if (data.action === 'freecamUpdate') {
-                            this.updateDisplay(data);
-                        }
-                        if (data.action === 'freecamToggle') {
-                            this.enabled = data.enabled;
-                            this.container.style.display = this.enabled ? 'block' : 'none';
-                        }
-                    });
-                }
-
-                updateDisplay(data) {
-                    if (data.feature) {
-                        this.currentFeature = data.feature;
-                        document.getElementById('freecam-feature').textContent = data.feature;
-                    }
-                    
-                    if (data.model) {
-                        this.currentModel = data.model;
-                        document.getElementById('freecam-model').textContent = data.model;
-                    }
-                    
-                    if (data.speed !== undefined) {
-                        this.speed = data.speed;
-                        const speedPercent = Math.min((data.speed / 10) * 100, 100);
-                        document.getElementById('freecam-speed-fill').style.width = speedPercent + '%';
-                        document.getElementById('freecam-speed-value').textContent = data.speed.toFixed(1) + 'x';
-                    }
-                    
-                    if (data.coords) {
-                        this.coords = data.coords;
-                        document.getElementById('freecam-x').textContent = data.coords.x.toFixed(2);
-                        document.getElementById('freecam-y').textContent = data.coords.y.toFixed(2);
-                        document.getElementById('freecam-z').textContent = data.coords.z.toFixed(2);
-                    }
-                }
-
-                updateSpeed(speedPercent) {
-                    document.getElementById('freecam-speed-fill').style.width = Math.min(speedPercent, 100) + '%';
-                }
-            }
-
-            // ===== PLAYERS LIST SYSTEM =====
-            class PlayersList {
-                constructor() {
-                    this.selectedPlayer = null;
-                    this.players = [];
-                    this.container = null;
-                    this.initDOM();
-                    this.startListening();
-                }
-
-                initDOM() {
-                    // إنشاء عنصر DOM
-                    this.container = document.createElement('div');
-                    this.container.className = 'players-list-container';
-                    this.container.innerHTML = `
-                        <div class="players-list-sidebar" id="players-sidebar"></div>
-                        <div class="players-list-info" id="players-info">
-                            <h3>Select a player</h3>
-                            <p style="color: #888; font-size: 11px;">Click on a player to view details</p>
-                        </div>
-                    `;
-                    document.body.appendChild(this.container);
-                }
-
-                startListening() {
-                    window.addEventListener('message', (e) => {
-                        const data = e.data;
-                        if (data.action === 'updatePlayers') {
-                            this.players = data.players || [];
-                            this.updatePlayersList();
-                        }
-                    });
-                }
-
-                updatePlayersList() {
-                    const sidebar = document.getElementById('players-sidebar');
-                    sidebar.innerHTML = '';
-
-                    this.players.forEach(player => {
-                        const playerItem = document.createElement('div');
-                        playerItem.className = 'player-item';
-                        if (this.selectedPlayer && this.selectedPlayer.id === player.id) {
-                            playerItem.classList.add('selected');
-                        }
-                        playerItem.textContent = `${player.name}`;
-                        playerItem.onclick = () => this.selectPlayer(player);
-                        sidebar.appendChild(playerItem);
-                    });
-                }
-
-                selectPlayer(player) {
-                    this.selectedPlayer = player;
-                    this.updatePlayersList();
-                    this.displayPlayerInfo();
-                }
-
-                displayPlayerInfo() {
-                    if (!this.selectedPlayer) return;
-
-                    const info = document.getElementById('players-info');
-                    const p = this.selectedPlayer;
-                    
-                    info.innerHTML = `
-                        <h3>${p.name}</h3>
-                        <div class="player-detail-row">
-                            <span class="player-detail-label">Name</span>
-                            <span class="player-detail-value name">${p.name}</span>
-                        </div>
-                        <div class="player-detail-row">
-                            <span class="player-detail-label">ID</span>
-                            <span class="player-detail-value">${p.id}</span>
-                        </div>
-                        <div class="player-detail-row">
-                            <span class="player-detail-label">Distance</span>
-                            <span class="player-detail-value distance">${p.distance}m</span>
-                        </div>
-                        <div class="player-detail-row">
-                            <span class="player-detail-label">Speed</span>
-                            <span class="player-detail-value speed">${p.speed} km/h</span>
-                        </div>
-                        <div class="player-detail-row">
-                            <span class="player-detail-label">Health</span>
-                            <span class="player-detail-value health">${Math.max(0, p.health)}%</span>
-                        </div>
-                        <div class="player-detail-row">
-                            <span class="player-detail-label">Armor</span>
-                            <span class="player-detail-value armor">${p.armor}%</span>
-                        </div>
-                        <div class="player-detail-row">
-                            <span class="player-detail-label">Weapon</span>
-                            <span class="player-detail-value weapon">${p.weapon || 'Unarmed'}</span>
-                        </div>
-                        <div class="player-detail-row">
-                            <span class="player-detail-label">Vehicle</span>
-                            <span class="player-detail-value vehicle">${p.vehicle || 'None'}</span>
-                        </div>
-                    `;
-                }
-            }
-
-            // ===== PLAYER DETECTOR SYSTEM =====
-            class PlayerDetector {
-                constructor() {
-                    this.canvas = document.getElementById('player-detector-canvas');
-                    this.ctx = this.canvas.getContext('2d');
-                    this.leftPanel = document.getElementById('detector-left-panel');
-                    this.players = [];
-                    this.enabled = false;
-                    this.myPos = { x: 0, y: 0, z: 0 };
-                    this.radarRange = 500; // meters
-                    
-                    this.setupCanvas();
-                    this.startListening();
-                    this.animate();
-                }
-
-                setupCanvas() {
-                    this.canvas.width = this.canvas.offsetWidth;
-                    this.canvas.height = this.canvas.offsetHeight;
-                    window.addEventListener('resize', () => {
-                        this.canvas.width = this.canvas.offsetWidth;
-                        this.canvas.height = this.canvas.offsetHeight;
-                    });
-                }
-
-                startListening() {
-                    window.addEventListener('message', (e) => {
-                        const data = e.data;
-                        if (data.action === 'updatePlayers') {
-                            this.players = data.players || [];
-                            this.myPos = data.myPos || { x: 0, y: 0, z: 0 };
-                        }
-                        if (data.action === 'toggleDetector') {
-                            this.enabled = data.enabled;
-                            if (!this.enabled) {
-                                this.clear();
-                            }
-                        }
-                        if (data.action === 'setRadarRange') {
-                            this.radarRange = data.range || 500;
-                        }
-                    });
-                }
-
-                clear() {
-                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                    this.leftPanel.innerHTML = '';
-                }
-
-                drawRadarGrid() {
-                    const w = this.canvas.width;
-                    const h = this.canvas.height;
-                    const centerX = w / 2;
-                    const centerY = h / 2;
-
-                    // رسم شبكة خفيفة
-                    this.ctx.strokeStyle = 'rgba(204, 51, 0, 0.15)';
-                    this.ctx.lineWidth = 0.5;
-                    const gridSize = 40;
-                    for (let i = 0; i < w; i += gridSize) {
-                        this.ctx.beginPath();
-                        this.ctx.moveTo(i, 0);
-                        this.ctx.lineTo(i, h);
-                        this.ctx.stroke();
-                    }
-                    for (let i = 0; i < h; i += gridSize) {
-                        this.ctx.beginPath();
-                        this.ctx.moveTo(0, i);
-                        this.ctx.lineTo(w, i);
-                        this.ctx.stroke();
-                    }
-
-                    // رسم دائرة الرادار
-                    this.ctx.strokeStyle = 'rgba(204, 51, 0, 0.4)';
-                    this.ctx.lineWidth = 1;
-                    const radarRadius = (w / 2 - 20);
-                    this.ctx.beginPath();
-                    this.ctx.arc(centerX, centerY, radarRadius, 0, Math.PI * 2);
-                    this.ctx.stroke();
-
-                    // رسم خطوط تقسيم
-                    this.ctx.strokeStyle = 'rgba(204, 51, 0, 0.2)';
-                    this.ctx.lineWidth = 0.5;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(centerX, centerY - radarRadius);
-                    this.ctx.lineTo(centerX, centerY + radarRadius);
-                    this.ctx.stroke();
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(centerX - radarRadius, centerY);
-                    this.ctx.lineTo(centerX + radarRadius, centerY);
-                    this.ctx.stroke();
-
-                    // مركز الرادار
-                    this.ctx.fillStyle = 'rgba(204, 51, 0, 0.6)';
-                    this.ctx.beginPath();
-                    this.ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
-                    this.ctx.fill();
-                }
-
-                drawPlayerDot(player) {
-                    const w = this.canvas.width;
-                    const h = this.canvas.height;
-                    const centerX = w / 2;
-                    const centerY = h / 2;
-
-                    const dx = player.x - this.myPos.x;
-                    const dy = player.y - this.myPos.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance > this.radarRange) return;
-
-                    // حساب موضع اللاعب على الرادار
-                    const scale = (w / 2 - 20) / this.radarRange;
-                    const x = centerX + (dx * scale);
-                    const y = centerY + (dy * scale);
-
-                    // التأكد من أن النقطة داخل الحدود
-                    if (x < 0 || x > w || y < 0 || y > h) return;
-
-                    // رسم النقطة بلون أخضر
-                    this.ctx.fillStyle = '#00ff88';
-                    this.ctx.beginPath();
-                    this.ctx.arc(x, y, 4, 0, Math.PI * 2);
-                    this.ctx.fill();
-
-                    // إضاءة حول النقطة
-                    this.ctx.strokeStyle = 'rgba(0, 255, 136, 0.3)';
-                    this.ctx.lineWidth = 1;
-                    this.ctx.beginPath();
-                    this.ctx.arc(x, y, 10, 0, Math.PI * 2);
-                    this.ctx.stroke();
-
-                    // نبض تنفسي
-                    const pulse = Math.sin(Date.now() * 0.003) * 0.3 + 0.7;
-                    this.ctx.strokeStyle = `rgba(0, 255, 136, ${pulse * 0.3})`;
-                    this.ctx.lineWidth = 2;
-                    this.ctx.beginPath();
-                    this.ctx.arc(x, y, 15, 0, Math.PI * 2);
-                    this.ctx.stroke();
-                }
-
-                updateLeftPanel() {
-                    this.leftPanel.innerHTML = '';
-                    
-                    // العثور على أقرب لاعب
-                    const playersInRange = this.players.filter(player => {
-                        const dx = player.x - this.myPos.x;
-                        const dy = player.y - this.myPos.y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        return dist <= this.radarRange;
-                    }).sort((a, b) => {
-                        const distA = Math.sqrt((a.x - this.myPos.x) ** 2 + (a.y - this.myPos.y) ** 2);
-                        const distB = Math.sqrt((b.x - this.myPos.x) ** 2 + (b.y - this.myPos.y) ** 2);
-                        return distA - distB;
-                    });
-
-                    if (playersInRange.length > 0) {
-                        const closestPlayer = playersInRange[0];
-                        const dx = closestPlayer.x - this.myPos.x;
-                        const dy = closestPlayer.y - this.myPos.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        const infoHTML = `
-                            <div class="player-info-row">
-                                <span class="info-label">Username</span>
-                                <span class="info-value info-username">${closestPlayer.name || 'Unknown'}</span>
-                            </div>
-                            <div class="player-info-row">
-                                <span class="info-label">Distance</span>
-                                <span class="info-value info-distance">${Math.round(distance)}m</span>
-                            </div>
-                            <div class="player-info-row">
-                                <span class="info-label">Weapon</span>
-                                <span class="info-value info-weapon">${closestPlayer.weapon || 'Unarmed'}</span>
-                            </div>
-                        `;
-                        this.leftPanel.innerHTML = infoHTML;
-                    }
-                }
-
-                animate() {
-                    if (this.enabled) {
-                        // مسح الخلفية
-                        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
-                        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-                        // رسم شبكة الرادار
-                        this.drawRadarGrid();
-
-                        // رسم نقاط اللاعبين
-                        this.players.forEach(player => {
-                            this.drawPlayerDot(player);
-                        });
-
-                        // تحديث اللوحة اليسرى بمعلومات أقرب لاعب
-                        this.updateLeftPanel();
-                    } else {
-                        this.clear();
-                    }
-
-                    requestAnimationFrame(() => this.animate());
-                }
-            }
-
-            // تهيئة عرض الفريكام
-            window.freecamDisplay = new FreecamDisplay();
-
-            // تهيئة نظام قائمة اللاعبين
-            window.playersList = new PlayersList();
-
-            // تهيئة نظام كشف اللاعبين
-            window.playerDetector = new PlayerDetector();
-
-            // واجهة للتحكم من Lua
-            window.togglePlayerDetector = function(enabled) {
-                window.playerDetector.enabled = enabled;
-            };
-
-            window.updatePlayerDetectorData = function(players, myPos) {
-                window.playerDetector.players = players;
-                window.playerDetector.myPos = myPos;
-            };
-
-            window.setRadarRange = function(range) {
-                window.playerDetector.radarRange = range;
-            };
-            // ===== PLAYER DETECTOR SYSTEM - END =====
-
-            .freecam-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 12px;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(0, 212, 255, 0.3);
-            }
-
-            .freecam-title {
-                color: #00d4ff;
-                font-size: 13px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
-            }
-
-            .freecam-status {
-                display: inline-block;
-                width: 10px;
-                height: 10px;
-                background: #00ff88;
-                border-radius: 50%;
-                box-shadow: 0 0 10px #00ff88;
-                animation: freecam-pulse 1.5s infinite;
-            }
-
-            @keyframes freecam-pulse {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0.5; }
-            }
-
-            .freecam-section {
-                margin-bottom: 12px;
-            }
-
-            .freecam-section-title {
-                color: #ffaa00;
-                font-size: 10px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                margin-bottom: 6px;
-                opacity: 0.9;
-            }
-
-            .freecam-feature-display {
-                background: rgba(0, 212, 255, 0.1);
-                border: 1px solid #00d4ff;
-                border-radius: 4px;
-                padding: 8px;
-                margin-bottom: 6px;
-                text-align: center;
-            }
-
-            .freecam-feature-name {
-                color: #ff6b6b;
-                font-size: 12px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                margin-bottom: 4px;
-                text-shadow: 0 0 8px rgba(255, 107, 107, 0.5);
-            }
-
-            .freecam-feature-model {
-                color: #00ff88;
-                font-size: 10px;
-                opacity: 0.9;
-                word-break: break-all;
-            }
-
-            .freecam-speed-display {
-                background: rgba(0, 212, 255, 0.1);
-                border: 1px solid #00d4ff;
-                border-radius: 4px;
-                padding: 8px;
-            }
-
-            .freecam-speed-label {
-                color: #ffffff;
-                font-size: 9px;
-                text-transform: uppercase;
-                margin-bottom: 4px;
-                opacity: 0.8;
-            }
-
-            .freecam-speed-bar {
-                width: 100%;
-                height: 6px;
-                background: rgba(0, 0, 0, 0.5);
-                border: 1px solid #00d4ff;
-                border-radius: 3px;
-                overflow: hidden;
-                margin-bottom: 4px;
-            }
-
-            .freecam-speed-fill {
-                height: 100%;
-                width: 50%;
-                background: linear-gradient(90deg, #00ff88 0%, #ffaa00 50%, #ff6b6b 100%);
-                box-shadow: 0 0 8px #00ff88;
-                transition: width 0.3s ease;
-            }
-
-            .freecam-speed-value {
-                color: #00d4ff;
-                font-size: 10px;
-                text-align: right;
-            }
-
-            .freecam-coords {
-                background: rgba(0, 212, 255, 0.05);
-                border: 1px solid rgba(0, 212, 255, 0.2);
-                border-radius: 4px;
-                padding: 6px;
-                font-size: 8px;
-                color: #00d4ff;
-                line-height: 1.6;
-                max-height: 60px;
-                overflow-y: auto;
-            }
-
-            .freecam-coord-line {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 2px;
-            }
-
-            .freecam-coord-label {
-                opacity: 0.7;
-                min-width: 20px;
-            }
-
-            .freecam-coord-value {
-                color: #ffaa00;
-                font-weight: 700;
-            }
-
-            .freecam-controls-hint {
-                background: rgba(255, 170, 0, 0.1);
-                border-left: 2px solid #ffaa00;
-                padding: 6px 8px;
-                font-size: 8px;
-                color: #ffaa00;
-                line-height: 1.4;
-                margin-top: 8px;
-                border-radius: 2px;
-            }
-
-            /* ===== PLAYERS LIST SYSTEM ===== */
-            .players-list-container {
-                position: fixed;
-                bottom: 50px;
-                right: 20px;
-                width: 500px;
-                height: 400px;
-                background: rgba(0, 0, 0, 0.95);
-                border: 2px solid #cc3300;
-                border-radius: 4px;
-                display: flex;
-                flex-direction: row;
-                box-shadow: 0 0 30px rgba(204, 51, 0, 0.4),
-                            inset 0 0 20px rgba(0, 0, 0, 0.8);
-                z-index: 999;
-                overflow: hidden;
-                pointer-events: auto;
-            }
-
-            .players-list-sidebar {
-                width: 200px;
-                height: 100%;
-                border-right: 2px solid #cc3300;
-                overflow-y: auto;
-                background: rgba(0, 0, 0, 0.7);
-                padding: 8px 0;
-            }
-
-            .player-item {
-                padding: 12px 10px;
-                color: #00d4ff;
-                font-size: 11px;
-                cursor: pointer;
-                border-left: 3px solid transparent;
-                transition: all 0.2s;
-                background: rgba(0, 0, 0, 0.3);
-                margin: 2px 4px;
-                border-radius: 2px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .player-item:hover {
-                background: rgba(204, 51, 0, 0.2);
-                border-left-color: #ffaa00;
-                color: #ffaa00;
-            }
-
-            .player-item.selected {
-                background: rgba(204, 51, 0, 0.4);
-                border-left-color: #cc3300;
-                color: #ffffff;
-                text-shadow: 0 0 8px rgba(204, 51, 0, 0.8);
-            }
-
-            .players-list-info {
-                flex: 1;
-                padding: 15px;
-                overflow-y: auto;
-                background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(10, 5, 0, 0.8) 100%);
-            }
-
-            .players-list-info h3 {
-                color: #ffffff;
-                font-size: 13px;
-                margin: 0 0 15px 0;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-                border-bottom: 1px solid #cc3300;
-                padding-bottom: 8px;
-            }
-
-            .player-detail-row {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 10px;
-                padding-bottom: 8px;
-                border-bottom: 1px solid rgba(204, 51, 0, 0.2);
-            }
-
-            .player-detail-label {
-                font-size: 10px;
-                color: #ffffff;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-                opacity: 0.8;
-            }
-
-            .player-detail-value {
-                font-size: 11px;
-                color: #00ff88;
-                font-weight: 700;
-                text-shadow: 0 0 6px rgba(0, 255, 136, 0.6);
-                text-align: right;
-            }
-
-            .player-detail-value.name {
-                color: #ffffff !important;
-                text-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
-            }
-
-            .player-detail-value.distance {
-                color: #ffaa00 !important;
-            }
-
-            .player-detail-value.health {
-                color: #ff6b6b !important;
-            }
-
-            .player-detail-value.armor {
-                color: #00d4ff !important;
-            }
-
-            .player-detail-value.weapon {
-                color: #ff6b6b !important;
-            }
-
-            .player-detail-value.speed {
-                color: #ffaa00 !important;
-            }
-
-            .player-detail-value.vehicle {
-                color: #00ff88 !important;
-            }
-
-            .status-indicator {
-                display: inline-block;
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                margin-right: 6px;
-                animation: pulse-glow 1.5s infinite;
-            }
-
-            .status-alive {
-                background: #00ff88;
-                box-shadow: 0 0 8px #00ff88;
-            }
-
-            .status-dead {
-                background: #ff6b6b;
-                box-shadow: 0 0 8px #ff6b6b;
-            }
-
-            @keyframes pulse-glow {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0.5; }
-            }
-        </style>
+        })();
     </script>
 </html>
