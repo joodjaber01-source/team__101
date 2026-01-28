@@ -4995,188 +4995,185 @@ function Gt(t) {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
-                gap: .8vh;
+                gap: 0.5vh;
                 z-index: 9999;
                 pointer-events: none;
-                max-width: 35vh;
+                max-width: 30vh;
                 overflow: visible
             }
 
             .notification.svelte-10r2pqz {
-                min-width: 25vh;
-                max-width: 35vh;
-                background: linear-gradient(135deg,#0f0f0ff2,#191919f2,#0f0f0ff2);
+                min-width: 20vh;
+                max-width: 30vh;
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(12px);
                 color: #fff;
-                border-radius: .8vh;
-                font-family: Inter,Segoe UI,-apple-system,BlinkMacSystemFont,sans-serif;
-                box-shadow: 0 .5vh 2vh #0006,0 0 1vh #0003,inset 0 0 0 .1vh #ffffff1a;
+                border-radius: 0.6vh;
+                font-family: 'Segoe UI', Inter, system-ui, sans-serif;
+                box-shadow: 0 0.3vh 1.2vh rgba(0, 0, 0, 0.3);
                 text-align: left;
                 pointer-events: auto;
-                transition: all .4s cubic-bezier(.4,0,.2,1);
-                border: .1vh solid var(--notification-color);
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                border: 0.08vh solid rgba(255, 255, 255, 0.12);
                 position: relative;
                 overflow: hidden;
                 transform: translateZ(0);
-                will-change: transform,opacity;
-                animation: svelte-10r2pqz-notification-glow 2s ease-in-out infinite alternate;
+                will-change: transform, opacity;
                 display: flex;
                 align-items: center;
-                gap: .8vh;
-                padding: 1vh 1.2vh
+                gap: 0.8vh;
+                padding: 0.9vh 1vh
+            }
+
+            .notification.svelte-10r2pqz::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 0.3vh;
+                background: var(--notification-color, #4ade80);
+                border-radius: 0.6vh 0 0 0.6vh
+            }
+
+            .notification.svelte-10r2pqz:hover {
+                background: rgba(255, 255, 255, 0.12);
+                box-shadow: 0 0.5vh 1.8vh rgba(0, 0, 0, 0.4);
+                transform: translateX(-0.5vh)
+            }
+
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(100%)
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0)
+                }
+            }
+
+            @keyframes slideOutRight {
+                from {
+                    opacity: 1;
+                    transform: translateX(0)
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(100%)
+                }
+            }
+
+            .notification.svelte-10r2pqz {
+                animation: slideInRight 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)
             }
 
             .notification-icon.svelte-10r2pqz {
-                font-size: 1.4vh;
-                color: var(--notification-color);
+                font-size: 1.3vh;
+                color: var(--notification-color, #4ade80);
                 flex-shrink: 0;
-                animation: icon-pulse 2s ease-in-out infinite alternate
+                font-weight: 600
             }
 
             .notification-message.svelte-10r2pqz {
                 flex: 1;
-                font-size: 1.2vh;
-                font-weight: 500;
-                line-height: 1.3;
-                color: #fff;
-                word-wrap: break-word
+                font-size: 1.1vh;
+                font-weight: 400;
+                line-height: 1.4;
+                color: rgba(255, 255, 255, 0.95);
+                word-wrap: break-word;
+                letter-spacing: 0.02em
             }
 
             .notification-close.svelte-10r2pqz {
                 background: none;
                 border: none;
-                color: #fff9;
+                color: rgba(255, 255, 255, 0.5);
                 cursor: pointer;
-                padding: .2vh;
-                border-radius: .3vh;
-                transition: all .2s ease;
+                padding: 0.3vh;
+                border-radius: 0.3vh;
+                transition: all 0.2s ease;
                 flex-shrink: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 1.2vh
+                font-size: 1.1vh;
+                width: 1.8vh;
+                height: 1.8vh
             }
 
             .notification-close.svelte-10r2pqz:hover {
-                color: #fff;
-                background: #ffffff1a;
-                transform: scale(1.1)
-            }
-
-            .notification-icon-wrapper.svelte-10r2pqz {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 2.5vh;
-                height: 2.5vh;
-                border-radius: 50%;
-                background: linear-gradient(135deg,var(--notification-color) 0%,color-mix(in srgb,var(--notification-color) 80%,white) 100%);
-                box-shadow: 0 0 1vh var(--notification-color),inset 0 0 .5vh #fff3
-            }
-
-            .notification-icon.svelte-10r2pqz {
-                font-size: 1.3vh;
-                color: #fff;
-                text-shadow: 0 0 .5vh rgba(0,0,0,.5)
-            }
-
-            .notification-close.svelte-10r2pqz {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 2vh;
-                height: 2vh;
-                border-radius: 50%;
-                background: #ffffff1a;
-                color: #fff9;
-                cursor: pointer;
-                transition: all .2s ease;
-                font-size: 1vh
-            }
-
-            .notification-close.svelte-10r2pqz:hover {
-                background: #fff3;
-                color: #fff;
-                transform: scale(1.1)
+                color: rgba(255, 255, 255, 0.9);
+                background: rgba(255, 255, 255, 0.1);
+                transform: rotate(90deg) scale(1.15)
             }
 
             .notification-content.svelte-10r2pqz {
-                padding: 1vh 1.5vh 1.2vh;
+                padding: 0;
                 position: relative;
                 z-index: 2
             }
 
             .notification-message.svelte-10r2pqz {
-                font-size: 1.3vh;
-                font-weight: 500;
-                line-height: 1.5;
-                color: #fffffff2;
-                margin-bottom: .5vh;
+                font-size: 1.1vh;
+                font-weight: 400;
+                line-height: 1.4;
+                color: rgba(255, 255, 255, 0.95);
                 word-wrap: break-word
             }
 
             .notification-timestamp.svelte-10r2pqz {
-                font-size: 1vh;
+                font-size: 0.9vh;
                 font-weight: 400;
-                color: #ffffff80;
-                font-family: JetBrains Mono,Consolas,monospace
+                color: rgba(255, 255, 255, 0.6);
+                font-family: 'Courier New', monospace
             }
 
             .notification-progress.svelte-10r2pqz {
                 position: absolute;
                 bottom: 0;
                 left: 0;
-                height: .2vh;
-                background: linear-gradient(90deg,var(--notification-color) 0%,color-mix(in srgb,var(--notification-color) 60%,transparent) 100%);
-                border-radius: 0 0 1.2vh 1.2vh;
+                right: 0;
+                height: 0.15vh;
+                background: linear-gradient(90deg, var(--notification-color, #4ade80) 0%, transparent 100%);
+                border-radius: 0 0 0.6vh 0.6vh;
                 animation: svelte-10r2pqz-notification-progress 5s linear forwards
             }
 
             .notification.info.svelte-10r2pqz {
-                --notification-color: #686868
+                --notification-color: #06b6d4
             }
 
             .notification.success.svelte-10r2pqz {
-                --notification-color: #10b981
+                --notification-color: #4ade80
             }
 
             .notification.warn.svelte-10r2pqz {
-                --notification-color: #f59e0b
+                --notification-color: #fbbf24
             }
 
             .notification.error.svelte-10r2pqz {
-                --notification-color: #ef4444
+                --notification-color: #ff6b6b
             }
 
             .notification-key.svelte-10r2pqz {
-                background: linear-gradient(135deg,#68686833,#68686826);
-                border: .1vh solid rgba(139,92,246,.4);
-                border-radius: .4vh;
-                padding: .3vh .6vh;
-                font-family: JetBrains Mono,Consolas,monospace;
-                font-size: 1vh;
+                background: rgba(255, 255, 255, 0.08);
+                border: 0.08vh solid rgba(255, 255, 255, 0.15);
+                border-radius: 0.3vh;
+                padding: 0.2vh 0.5vh;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95vh;
                 font-weight: 600;
-                color: #686868;
-                margin: 0 .3vh;
-                text-shadow: 0 0 .3vh rgba(42, 41, 44, 0.5);
-                box-shadow: inset 0 0 .2vh #68686833,0 0 .5vh #6868684d;
-                display: inline-block
-            }
-
-            @keyframes svelte-10r2pqz-notification-glow {
-                0% {
-                    box-shadow: 0 .8vh 3vh #0009,0 0 2vh #0000004d,inset 0 0 0 .1vh #ffffff1a,0 0 1vh var(--notification-color)
-                }
-
-                to {
-                    box-shadow: 0 .8vh 3vh #0009,0 0 2vh #0000004d,inset 0 0 0 .1vh #ffffff1a,0 0 2vh var(--notification-color)
-                }
+                color: rgba(255, 255, 255, 0.85);
+                margin: 0 0.3vh;
+                display: inline-block;
+                backdrop-filter: blur(4px)
             }
 
             @keyframes svelte-10r2pqz-notification-progress {
                 0% {
                     width: 100%
                 }
-
                 to {
                     width: 0%
                 }
