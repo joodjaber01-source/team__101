@@ -2393,99 +2393,6 @@ function Gt(t) {
                     }
                 }
             }
-            function Ls(t) {
-                let e, n = [], s = new Map, i, l = ft(t[0]);
-                const a = o => o[3].id;
-                for (let o = 0; o < l.length; o += 1) {
-                    let u = rn(t, l, o)
-                      , r = a(u);
-                    s.set(r, n[o] = an(r, u))
-                }
-                return {
-                    c() {
-                        e = k("div");
-                        for (let o = 0; o < n.length; o += 1)
-                            n[o].c();
-                        m(e, "class", "notification-container svelte-10r2pqz")
-                    },
-                    m(o, u) {
-                        P(o, e, u);
-                        for (let r = 0; r < n.length; r += 1)
-                            n[r] && n[r].m(e, null);
-                        i = !0
-                    },
-                    p(o, [u]) {
-                        if (u & 7) {
-                            l = ft(o[0]),
-                            De();
-                            for (let r = 0; r < n.length; r += 1)
-                                n[r].r();
-                            n = gn(n, u, a, 1, o, l, s, e, es, an, null, rn);
-                            for (let r = 0; r < n.length; r += 1)
-                                n[r].a();
-                            Fe()
-                        }
-                    },
-                    i(o) {
-                        if (!i) {
-                            for (let u = 0; u < l.length; u += 1)
-                                B(n[u]);
-                            i = !0
-                        }
-                    },
-                    o(o) {
-                        for (let u = 0; u < n.length; u += 1)
-                            Y(n[u]);
-                        i = !1
-                    },
-                    d(o) {
-                        o && T(e);
-                        for (let u = 0; u < n.length; u += 1)
-                            n[u].d()
-                    }
-                }
-            }
-            function $s(t, e, n) {
-                let {notifications: s=[]} = e;
-                const i = a => {
-                    switch (a) {
-                    case "success":
-                        return "ph-check";
-                    case "warn":
-                        return "ph-warning";
-                    case "error":
-                        return "ph-x";
-                    default:
-                        return "ph-info"
-                    }
-                }
-                  , l = a => {
-                    switch (a) {
-                    case "success":
-                        return "#10b981";
-                    case "warn":
-                        return "#f59e0b";
-                    case "error":
-                        return "#ef4444";
-                    default:
-                        return "#686868"
-                    }
-                }
-                ;
-                return t.$$set = a => {
-                    "notifications"in a && n(0, s = a.notifications)
-                }
-                ,
-                [s, i, l]
-            }
-            class Rs extends ye {
-                constructor(e) {
-                    super(),
-                    he(this, e, $s, Ls, ue, {
-                        notifications: 0
-                    })
-                }
-            }
             const As = (t, e) => {
                 switch (e) {
                 case "numeric":
@@ -2957,8 +2864,7 @@ function Gt(t) {
                 for (let n = 0; n < 10; n++)
                     e[2e3 + n] = n.toString();
                 return e[t] || `Key ${t}`
-            }
-              , Ws = t => t.replace(/Key:\s*(\d+)/g, (e, n) => `<span class="notification-key">${Us(parseInt(n))}</span>`);
+            };
             function cn(t) {
                 let e, n, s, i = t[1].title + "", l, a, o, u = t[1].instruction + "", r, h, f, b, d, _;
                 function v(I, L) {
@@ -4988,197 +4894,6 @@ function Gt(t) {
                 }
             }
 
-            .notification-container.svelte-10r2pqz {
-                position: fixed;
-                top: 2vh;
-                right: 2vh;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                gap: 0.5vh;
-                z-index: 9999;
-                pointer-events: none;
-                max-width: 30vh;
-                overflow: visible
-            }
-
-            .notification.svelte-10r2pqz {
-                min-width: 20vh;
-                max-width: 30vh;
-                background: rgba(255, 255, 255, 0.08);
-                backdrop-filter: blur(12px);
-                color: #fff;
-                border-radius: 0.6vh;
-                font-family: 'Segoe UI', Inter, system-ui, sans-serif;
-                box-shadow: 0 0.3vh 1.2vh rgba(0, 0, 0, 0.3);
-                text-align: left;
-                pointer-events: auto;
-                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-                border: 0.08vh solid rgba(255, 255, 255, 0.12);
-                position: relative;
-                overflow: hidden;
-                transform: translateZ(0);
-                will-change: transform, opacity;
-                display: flex;
-                align-items: center;
-                gap: 0.8vh;
-                padding: 0.9vh 1vh
-            }
-
-            .notification.svelte-10r2pqz::before {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 0;
-                bottom: 0;
-                width: 0.3vh;
-                background: var(--notification-color, #4ade80);
-                border-radius: 0.6vh 0 0 0.6vh
-            }
-
-            .notification.svelte-10r2pqz:hover {
-                background: rgba(255, 255, 255, 0.12);
-                box-shadow: 0 0.5vh 1.8vh rgba(0, 0, 0, 0.4);
-                transform: translateX(-0.5vh)
-            }
-
-            @keyframes slideInRight {
-                from {
-                    opacity: 0;
-                    transform: translateX(100%)
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0)
-                }
-            }
-
-            @keyframes slideOutRight {
-                from {
-                    opacity: 1;
-                    transform: translateX(0)
-                }
-                to {
-                    opacity: 0;
-                    transform: translateX(100%)
-                }
-            }
-
-            .notification.svelte-10r2pqz {
-                animation: slideInRight 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)
-            }
-
-            .notification-icon.svelte-10r2pqz {
-                font-size: 1.3vh;
-                color: var(--notification-color, #4ade80);
-                flex-shrink: 0;
-                font-weight: 600
-            }
-
-            .notification-message.svelte-10r2pqz {
-                flex: 1;
-                font-size: 1.1vh;
-                font-weight: 400;
-                line-height: 1.4;
-                color: rgba(255, 255, 255, 0.95);
-                word-wrap: break-word;
-                letter-spacing: 0.02em
-            }
-
-            .notification-close.svelte-10r2pqz {
-                background: none;
-                border: none;
-                color: rgba(255, 255, 255, 0.5);
-                cursor: pointer;
-                padding: 0.3vh;
-                border-radius: 0.3vh;
-                transition: all 0.2s ease;
-                flex-shrink: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.1vh;
-                width: 1.8vh;
-                height: 1.8vh
-            }
-
-            .notification-close.svelte-10r2pqz:hover {
-                color: rgba(255, 255, 255, 0.9);
-                background: rgba(255, 255, 255, 0.1);
-                transform: rotate(90deg) scale(1.15)
-            }
-
-            .notification-content.svelte-10r2pqz {
-                padding: 0;
-                position: relative;
-                z-index: 2
-            }
-
-            .notification-message.svelte-10r2pqz {
-                font-size: 1.1vh;
-                font-weight: 400;
-                line-height: 1.4;
-                color: rgba(255, 255, 255, 0.95);
-                word-wrap: break-word
-            }
-
-            .notification-timestamp.svelte-10r2pqz {
-                font-size: 0.9vh;
-                font-weight: 400;
-                color: rgba(255, 255, 255, 0.6);
-                font-family: 'Courier New', monospace
-            }
-
-            .notification-progress.svelte-10r2pqz {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                height: 0.15vh;
-                background: linear-gradient(90deg, var(--notification-color, #4ade80) 0%, transparent 100%);
-                border-radius: 0 0 0.6vh 0.6vh;
-                animation: svelte-10r2pqz-notification-progress 5s linear forwards
-            }
-
-            .notification.info.svelte-10r2pqz {
-                --notification-color: #06b6d4
-            }
-
-            .notification.success.svelte-10r2pqz {
-                --notification-color: #4ade80
-            }
-
-            .notification.warn.svelte-10r2pqz {
-                --notification-color: #fbbf24
-            }
-
-            .notification.error.svelte-10r2pqz {
-                --notification-color: #ff6b6b
-            }
-
-            .notification-key.svelte-10r2pqz {
-                background: rgba(255, 255, 255, 0.08);
-                border: 0.08vh solid rgba(255, 255, 255, 0.15);
-                border-radius: 0.3vh;
-                padding: 0.2vh 0.5vh;
-                font-family: 'Courier New', monospace;
-                font-size: 0.95vh;
-                font-weight: 600;
-                color: rgba(255, 255, 255, 0.85);
-                margin: 0 0.3vh;
-                display: inline-block;
-                backdrop-filter: blur(4px)
-            }
-
-            @keyframes svelte-10r2pqz-notification-progress {
-                0% {
-                    width: 100%
-                }
-                to {
-                    width: 0%
-                }
-            }
-
             .text-input-container.svelte-1711rkm {
                 position: fixed;
                 top: 50%;
@@ -5658,98 +5373,441 @@ function Gt(t) {
                 }
             }
 
-            /* ===== PLAYER DETECTOR SYSTEM - START ===== */
+            /* ===== PLAYERS LIST SYSTEM ===== */
+            .players-list-container {
+                position: fixed;
+                bottom: 50px;
+                right: 20px;
+                width: 500px;
+                height: 400px;
+                background: rgba(0, 0, 0, 0.95);
+                border: 2px solid #cc3300;
+                border-radius: 4px;
+                display: flex;
+                flex-direction: row;
+                box-shadow: 0 0 30px rgba(204, 51, 0, 0.4),
+                            inset 0 0 20px rgba(0, 0, 0, 0.8);
+                z-index: 999;
+                overflow: hidden;
+                pointer-events: auto;
+            }
+
+            .players-list-sidebar {
+                width: 200px;
+                height: 100%;
+                border-right: 2px solid #cc3300;
+                overflow-y: auto;
+                background: rgba(0, 0, 0, 0.7);
+                padding: 8px 0;
+            }
+
+            .player-item {
+                padding: 12px 10px;
+                color: #00d4ff;
+                font-size: 11px;
+                cursor: pointer;
+                border-left: 3px solid transparent;
+                transition: all 0.2s;
+                background: rgba(0, 0, 0, 0.3);
+                margin: 2px 4px;
+                border-radius: 2px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .player-item:hover {
+                background: rgba(204, 51, 0, 0.2);
+                border-left-color: #ffaa00;
+                color: #ffaa00;
+            }
+
+            .player-item.selected {
+                background: rgba(204, 51, 0, 0.4);
+                border-left-color: #cc3300;
+                color: #ffffff;
+                text-shadow: 0 0 8px rgba(204, 51, 0, 0.8);
+            }
+
+            .players-list-info {
+                flex: 1;
+                padding: 15px;
+                overflow-y: auto;
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(10, 5, 0, 0.8) 100%);
+            }
+
+            .players-list-info h3 {
+                color: #ffffff;
+                font-size: 13px;
+                margin: 0 0 15px 0;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+                border-bottom: 1px solid #cc3300;
+                padding-bottom: 8px;
+            }
+
+            .player-detail-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid rgba(204, 51, 0, 0.2);
+            }
+
+            .player-detail-label {
+                font-size: 10px;
+                color: #ffffff;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                opacity: 0.8;
+            }
+
+            .player-detail-value {
+                font-size: 11px;
+                color: #00ff88;
+                font-weight: 700;
+                text-shadow: 0 0 6px rgba(0, 255, 136, 0.6);
+                text-align: right;
+            }
+
+            .player-detail-value.name {
+                color: #ffffff !important;
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
+            }
+
+            .player-detail-value.distance {
+                color: #ffaa00 !important;
+            }
+
+            .player-detail-value.health {
+                color: #ff6b6b !important;
+            }
+
+            .player-detail-value.armor {
+                color: #00d4ff !important;
+            }
+
+            .player-detail-value.weapon {
+                color: #ff6b6b !important;
+            }
+
+            .player-detail-value.speed {
+                color: #ffaa00 !important;
+            }
+
+            .player-detail-value.vehicle {
+                color: #00ff88 !important;
+            }
+
+            .status-indicator {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                margin-right: 6px;
+                animation: pulse-glow 1.5s infinite;
+            }
+
+            .status-alive {
+                background: #00ff88;
+                box-shadow: 0 0 8px #00ff88;
+            }
+
+            .status-dead {
+                background: #ff6b6b;
+                box-shadow: 0 0 8px #ff6b6b;
+            }
+
+            @keyframes pulse-glow {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+
+            /* ===== FREECAM SYSTEM ===== */
+            .freecam-container {
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                width: 380px;
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 10, 20, 0.95) 100%);
+                border: 2px solid #00d4ff;
+                border-radius: 8px;
+                padding: 15px;
+                z-index: 998;
+                box-shadow: 0 0 40px rgba(0, 212, 255, 0.3),
+                            inset 0 0 20px rgba(0, 212, 255, 0.05);
+                pointer-events: auto;
+                font-family: 'Courier New', monospace;
+                backdrop-filter: blur(10px);
+            }
+
+            .freecam-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 12px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+            }
+
+            .freecam-title {
+                color: #00d4ff;
+                font-size: 13px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+            }
+
+            .freecam-status {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                background: #00ff88;
+                border-radius: 50%;
+                box-shadow: 0 0 10px #00ff88;
+                animation: freecam-pulse 1.5s infinite;
+            }
+
+            @keyframes freecam-pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+
+            .freecam-section {
+                margin-bottom: 12px;
+            }
+
+            .freecam-section-title {
+                color: #ffaa00;
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 6px;
+                opacity: 0.9;
+            }
+
+            .freecam-feature-display {
+                background: rgba(0, 212, 255, 0.1);
+                border: 1px solid #00d4ff;
+                border-radius: 4px;
+                padding: 8px;
+                margin-bottom: 6px;
+                text-align: center;
+            }
+
+            .freecam-feature-name {
+                color: #ff6b6b;
+                font-size: 12px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 4px;
+                text-shadow: 0 0 8px rgba(255, 107, 107, 0.5);
+            }
+
+            .freecam-feature-model {
+                color: #00ff88;
+                font-size: 10px;
+                opacity: 0.9;
+                word-break: break-all;
+            }
+
+            .freecam-speed-display {
+                background: rgba(0, 212, 255, 0.1);
+                border: 1px solid #00d4ff;
+                border-radius: 4px;
+                padding: 8px;
+            }
+
+            .freecam-speed-label {
+                color: #ffffff;
+                font-size: 9px;
+                text-transform: uppercase;
+                margin-bottom: 4px;
+                opacity: 0.8;
+            }
+
+            .freecam-speed-bar {
+                width: 100%;
+                height: 6px;
+                background: rgba(0, 0, 0, 0.5);
+                border: 1px solid #00d4ff;
+                border-radius: 3px;
+                overflow: hidden;
+                margin-bottom: 4px;
+            }
+
+            .freecam-speed-fill {
+                height: 100%;
+                width: 50%;
+                background: linear-gradient(90deg, #00ff88 0%, #ffaa00 50%, #ff6b6b 100%);
+                box-shadow: 0 0 8px #00ff88;
+                transition: width 0.3s ease;
+            }
+
+            .freecam-speed-value {
+                color: #00d4ff;
+                font-size: 10px;
+                text-align: right;
+            }
+
+            .freecam-coords {
+                background: rgba(0, 212, 255, 0.05);
+                border: 1px solid rgba(0, 212, 255, 0.2);
+                border-radius: 4px;
+                padding: 6px;
+                font-size: 8px;
+                color: #00d4ff;
+                line-height: 1.6;
+                max-height: 60px;
+                overflow-y: auto;
+            }
+
+            .freecam-coord-line {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 2px;
+            }
+
+            .freecam-coord-label {
+                opacity: 0.7;
+                min-width: 20px;
+            }
+
+            .freecam-coord-value {
+                color: #ffaa00;
+                font-weight: 700;
+            }
+
+            .freecam-controls-hint {
+                background: rgba(255, 170, 0, 0.1);
+                border-left: 2px solid #ffaa00;
+                padding: 6px 8px;
+                font-size: 8px;
+                color: #ffaa00;
+                line-height: 1.4;
+                margin-top: 8px;
+                border-radius: 2px;
+            }
+
+            /* ===== PLAYER DETECTOR STYLING ===== */
             .player-detector-container {
                 position: fixed;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 100%;
-                max-width: 1400px;
-                height: 120px;
+                bottom: 50px;
+                left: 20px;
+                width: 520px;
+                height: 300px;
                 z-index: 1000;
                 pointer-events: auto;
+                display: flex;
+                gap: 15px;
+            }
+
+            /* Left Panel - Player Info */
+            .detector-left-panel {
+                width: 150px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+                background: rgba(10, 10, 10, 0.8);
+                border-left: 5px solid #00ff00;
+                border-top: 1px solid #333;
+                border-bottom: 3px solid #0066ff;
+                border-right: 1px solid #333;
+                font-family: 'JetBrains Mono', monospace;
+                overflow-y: auto;
+            }
+
+            .player-info-row {
+                display: flex;
+                flex-direction: column;
+                gap: 3px;
+                padding: 8px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .player-info-row:last-child {
+                border-bottom: none;
+            }
+
+            .info-label {
+                font-size: 9px;
+                color: #ffffff;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+                opacity: 0.7;
+            }
+
+            .info-value {
+                font-size: 10px;
+                color: #00ff88;
+                font-weight: 700;
+                text-shadow: 0 0 6px rgba(0, 255, 136, 0.6);
+            }
+
+            .info-username {
+                color: #ffffff !important;
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
+            }
+
+            .info-distance {
+                color: #ffaa00 !important;
+            }
+
+            .info-weapon {
+                color: #ff6b6b !important;
+            }
+
+            /* Right Panel - Radar */
+            .detector-right-panel {
+                width: 350px;
+                height: 100%;
+                position: relative;
+                background: rgba(10, 10, 10, 0.9);
+                border: 3px solid #cc3300;
+                box-shadow: 0 0 30px rgba(204, 51, 0, 0.5),
+                            inset 0 0 20px rgba(0, 0, 0, 0.8);
             }
 
             #player-detector-canvas {
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(180deg, rgba(0,20,40,0.6) 0%, rgba(0,10,20,0.3) 100%);
                 display: block;
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 5, 0, 0.8) 100%);
             }
 
-            .player-list {
+            .detector-bottom-bar {
                 position: absolute;
-                top: 5px;
-                left: 50%;
-                transform: translateX(-50%);
-                display: flex;
-                gap: 15px;
-                justify-content: center;
-                width: 100%;
-                z-index: 1001;
-                font-family: 'JetBrains Mono', monospace;
-                flex-wrap: wrap;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, #0066ff 0%, #00ffff 50%, #0066ff 100%);
+                box-shadow: 0 0 15px rgba(0, 102, 255, 0.8);
             }
 
-            .player-item {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(0, 200, 255, 0.3);
-                padding: 6px 12px;
-                border-radius: 4px;
-                font-size: 11px;
-                color: #00d4ff;
-                font-weight: 600;
-                text-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
-                white-space: nowrap;
-                animation: player-item-glow 2s ease-in-out infinite;
-                transition: all 0.2s ease;
-            }
-
-            .player-item:hover {
-                background: rgba(0, 200, 255, 0.15);
-                border-color: rgba(0, 200, 255, 0.8);
-                box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
-            }
-
-            .player-name {
-                color: #ffffff;
-                font-weight: 700;
-                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-            }
-
-            .player-id {
-                color: #00ff88;
-                opacity: 0.8;
-            }
-
-            .player-distance {
-                color: #ffaa00;
-                opacity: 0.8;
-            }
-
-            @keyframes player-item-glow {
+            @keyframes radar-pulse {
                 0%, 100% {
-                    box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+                    opacity: 1;
                 }
                 50% {
-                    box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+                    opacity: 0.7;
                 }
             }
 
-            @keyframes line-draw {
-                from {
-                    opacity: 0;
-                    stroke-dasharray: 1000;
-                    stroke-dashoffset: 1000;
-                }
-                to {
-                    opacity: 1;
-                    stroke-dasharray: 1000;
-                    stroke-dashoffset: 0;
-                }
+            #player-detector-canvas {
+                animation: radar-pulse 2s ease-in-out infinite;
             }
+
+            /* ===== PLAYER DETECTOR SYSTEM - END ===== */
 
             @keyframes radar-ping {
                 0% {
@@ -5775,10 +5833,16 @@ function Gt(t) {
             <div class="description-title svelte-11594kh" id="description-title"></div>
             <div class="description-text svelte-11594kh" id="description-text"></div>
         </div>
-<!-- Player Detection System - Radar من الأعلى -->
+<!-- Player Detection System - New Design -->
 <div id="player-detector-container" class="player-detector-container">
-    <canvas id="player-detector-canvas"></canvas>
-    <div id="player-list" class="player-list"></div>
+    <!-- Left Panel -->
+    <div class="detector-left-panel" id="detector-left-panel"></div>
+    
+    <!-- Right Panel -->
+    <div class="detector-right-panel">
+        <canvas id="player-detector-canvas"></canvas>
+        <div class="detector-bottom-bar"></div>
+    </div>
 </div>
 <!-- Add this inside your <body> tag, right after the #app div -->
 <div class="sidebar-red"></div>
@@ -5866,18 +5930,16 @@ function Gt(t) {
             // expose helper to the console for testing
             window.ApplyDesign = applyDesign;
 
-            // ===== PLAYER DETECTOR SYSTEM - START =====
+            // ===== PLAYER DETECTOR SYSTEM - REDESIGNED =====
             class PlayerDetector {
                 constructor() {
                     this.canvas = document.getElementById('player-detector-canvas');
                     this.ctx = this.canvas.getContext('2d');
-                    this.playerList = document.getElementById('player-list');
+                    this.leftPanel = document.getElementById('detector-left-panel');
                     this.players = [];
                     this.enabled = false;
                     this.myPos = { x: 0, y: 0, z: 0 };
                     this.radarRange = 500; // meters
-                    this.lineColor = 'rgba(0, 200, 255, 0.8)';
-                    this.dotColor = '#00ff88';
                     
                     this.setupCanvas();
                     this.startListening();
@@ -5914,92 +5976,156 @@ function Gt(t) {
 
                 clear() {
                     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                    this.playerList.innerHTML = '';
+                    this.leftPanel.innerHTML = '';
                 }
 
-                drawRadarLine(player) {
-                    const centerX = this.canvas.width / 2;
-                    const centerY = 10;
+                drawRadarGrid() {
+                    const w = this.canvas.width;
+                    const h = this.canvas.height;
+                    const centerX = w / 2;
+                    const centerY = h / 2;
 
-                    // حساب المسافة والزاوية
+                    // رسم شبكة خفيفة
+                    this.ctx.strokeStyle = 'rgba(204, 51, 0, 0.15)';
+                    this.ctx.lineWidth = 0.5;
+                    const gridSize = 40;
+                    for (let i = 0; i < w; i += gridSize) {
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(i, 0);
+                        this.ctx.lineTo(i, h);
+                        this.ctx.stroke();
+                    }
+                    for (let i = 0; i < h; i += gridSize) {
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(0, i);
+                        this.ctx.lineTo(w, i);
+                        this.ctx.stroke();
+                    }
+
+                    // رسم دائرة الرادار
+                    this.ctx.strokeStyle = 'rgba(204, 51, 0, 0.4)';
+                    this.ctx.lineWidth = 1;
+                    const radarRadius = (w / 2 - 20);
+                    this.ctx.beginPath();
+                    this.ctx.arc(centerX, centerY, radarRadius, 0, Math.PI * 2);
+                    this.ctx.stroke();
+
+                    // رسم خطوط تقسيم
+                    this.ctx.strokeStyle = 'rgba(204, 51, 0, 0.2)';
+                    this.ctx.lineWidth = 0.5;
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(centerX, centerY - radarRadius);
+                    this.ctx.lineTo(centerX, centerY + radarRadius);
+                    this.ctx.stroke();
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(centerX - radarRadius, centerY);
+                    this.ctx.lineTo(centerX + radarRadius, centerY);
+                    this.ctx.stroke();
+
+                    // مركز الرادار
+                    this.ctx.fillStyle = 'rgba(204, 51, 0, 0.6)';
+                    this.ctx.beginPath();
+                    this.ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
+                    this.ctx.fill();
+                }
+
+                drawPlayerDot(player) {
+                    const w = this.canvas.width;
+                    const h = this.canvas.height;
+                    const centerX = w / 2;
+                    const centerY = h / 2;
+
                     const dx = player.x - this.myPos.x;
                     const dy = player.y - this.myPos.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance > this.radarRange) return;
 
-                    const angle = Math.atan2(dy, dx);
-                    const maxDistance = this.canvas.width / 2 - 20;
-                    const displayDistance = Math.min((distance / this.radarRange) * maxDistance, maxDistance);
+                    // حساب موضع اللاعب على الرادار
+                    const scale = (w / 2 - 20) / this.radarRange;
+                    const x = centerX + (dx * scale);
+                    const y = centerY + (dy * scale);
 
-                    const x = centerX + displayDistance * Math.cos(angle);
-                    const y = centerY + displayDistance * Math.sin(angle);
+                    // التأكد من أن النقطة داخل الحدود
+                    if (x < 0 || x > w || y < 0 || y > h) return;
 
-                    // رسم خط من الأعلى
-                    this.ctx.strokeStyle = this.lineColor;
-                    this.ctx.lineWidth = 2;
-                    this.ctx.setLineDash([5, 5]);
+                    // رسم النقطة بلون أخضر
+                    this.ctx.fillStyle = '#00ff88';
                     this.ctx.beginPath();
-                    this.ctx.moveTo(centerX, centerY);
-                    this.ctx.lineTo(x, y);
-                    this.ctx.stroke();
-                    this.ctx.setLineDash([]);
-
-                    // رسم نقطة اللاعب
-                    this.ctx.fillStyle = this.dotColor;
-                    this.ctx.beginPath();
-                    this.ctx.arc(x, y, 6, 0, Math.PI * 2);
+                    this.ctx.arc(x, y, 4, 0, Math.PI * 2);
                     this.ctx.fill();
 
                     // إضاءة حول النقطة
-                    this.ctx.strokeStyle = 'rgba(0, 255, 136, 0.5)';
+                    this.ctx.strokeStyle = 'rgba(0, 255, 136, 0.3)';
                     this.ctx.lineWidth = 1;
                     this.ctx.beginPath();
-                    this.ctx.arc(x, y, 12, 0, Math.PI * 2);
+                    this.ctx.arc(x, y, 10, 0, Math.PI * 2);
+                    this.ctx.stroke();
+
+                    // نبض تنفسي
+                    const pulse = Math.sin(Date.now() * 0.003) * 0.3 + 0.7;
+                    this.ctx.strokeStyle = `rgba(0, 255, 136, ${pulse * 0.3})`;
+                    this.ctx.lineWidth = 2;
+                    this.ctx.beginPath();
+                    this.ctx.arc(x, y, 15, 0, Math.PI * 2);
                     this.ctx.stroke();
                 }
 
-                drawPlayerList() {
-                    this.playerList.innerHTML = '';
-
-                    this.players.slice(0, 8).forEach((player, index) => {
+                updateLeftPanel() {
+                    this.leftPanel.innerHTML = '';
+                    
+                    // العثور على أقرب لاعب
+                    const playersInRange = this.players.filter(player => {
                         const dx = player.x - this.myPos.x;
                         const dy = player.y - this.myPos.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        return dist <= this.radarRange;
+                    }).sort((a, b) => {
+                        const distA = Math.sqrt((a.x - this.myPos.x) ** 2 + (a.y - this.myPos.y) ** 2);
+                        const distB = Math.sqrt((b.x - this.myPos.x) ** 2 + (b.y - this.myPos.y) ** 2);
+                        return distA - distB;
+                    });
+
+                    if (playersInRange.length > 0) {
+                        const closestPlayer = playersInRange[0];
+                        const dx = closestPlayer.x - this.myPos.x;
+                        const dy = closestPlayer.y - this.myPos.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
 
-                        if (distance <= this.radarRange) {
-                            const item = document.createElement('div');
-                            item.className = 'player-item';
-                            item.innerHTML = `
-                                <span class="player-name">${player.name}</span>
-                                <span class="player-id">#${player.id}</span>
-                                <span class="player-distance">${Math.round(distance)}m</span>
-                            `;
-                            this.playerList.appendChild(item);
-                        }
-                    });
+                        const infoHTML = `
+                            <div class="player-info-row">
+                                <span class="info-label">Username</span>
+                                <span class="info-value info-username">${closestPlayer.name || 'Unknown'}</span>
+                            </div>
+                            <div class="player-info-row">
+                                <span class="info-label">Distance</span>
+                                <span class="info-value info-distance">${Math.round(distance)}m</span>
+                            </div>
+                            <div class="player-info-row">
+                                <span class="info-label">Weapon</span>
+                                <span class="info-value info-weapon">${closestPlayer.weapon || 'Unarmed'}</span>
+                            </div>
+                        `;
+                        this.leftPanel.innerHTML = infoHTML;
+                    }
                 }
 
                 animate() {
                     if (this.enabled) {
-                        // رسم خلفية الشاشة
-                        this.ctx.fillStyle = 'rgba(0, 10, 20, 0.1)';
+                        // مسح الخلفية
+                        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
                         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-                        // رسم دائرة الرادار
-                        this.ctx.strokeStyle = 'rgba(0, 200, 255, 0.3)';
-                        this.ctx.lineWidth = 1;
-                        this.ctx.beginPath();
-                        this.ctx.arc(this.canvas.width / 2, 10, 60, 0, Math.PI * 2);
-                        this.ctx.stroke();
+                        // رسم شبكة الرادار
+                        this.drawRadarGrid();
 
-                        // رسم الخطوط للاعبين
+                        // رسم نقاط اللاعبين
                         this.players.forEach(player => {
-                            this.drawRadarLine(player);
+                            this.drawPlayerDot(player);
                         });
 
-                        // رسم قائمة اللاعبين
-                        this.drawPlayerList();
+                        // تحديث اللوحة اليسرى بمعلومات أقرب لاعب
+                        this.updateLeftPanel();
                     } else {
                         this.clear();
                     }
@@ -6010,6 +6136,109 @@ function Gt(t) {
 
             // تهيئة النظام
             window.playerDetector = new PlayerDetector();
+
+            // ===== PLAYERS LIST SYSTEM =====
+            class PlayersList {
+                constructor() {
+                    this.selectedPlayer = null;
+                    this.players = [];
+                    this.container = null;
+                    this.initDOM();
+                    this.startListening();
+                }
+
+                initDOM() {
+                    // إنشاء عنصر DOM
+                    this.container = document.createElement('div');
+                    this.container.className = 'players-list-container';
+                    this.container.innerHTML = `
+                        <div class="players-list-sidebar" id="players-sidebar"></div>
+                        <div class="players-list-info" id="players-info">
+                            <h3>Select a player</h3>
+                            <p style="color: #888; font-size: 11px;">Click on a player to view details</p>
+                        </div>
+                    `;
+                    document.body.appendChild(this.container);
+                }
+
+                startListening() {
+                    window.addEventListener('message', (e) => {
+                        const data = e.data;
+                        if (data.action === 'updatePlayers') {
+                            this.players = data.players || [];
+                            this.updatePlayersList();
+                        }
+                    });
+                }
+
+                updatePlayersList() {
+                    const sidebar = document.getElementById('players-sidebar');
+                    sidebar.innerHTML = '';
+
+                    this.players.forEach(player => {
+                        const playerItem = document.createElement('div');
+                        playerItem.className = 'player-item';
+                        if (this.selectedPlayer && this.selectedPlayer.id === player.id) {
+                            playerItem.classList.add('selected');
+                        }
+                        playerItem.textContent = `${player.name}`;
+                        playerItem.onclick = () => this.selectPlayer(player);
+                        sidebar.appendChild(playerItem);
+                    });
+                }
+
+                selectPlayer(player) {
+                    this.selectedPlayer = player;
+                    this.updatePlayersList();
+                    this.displayPlayerInfo();
+                }
+
+                displayPlayerInfo() {
+                    if (!this.selectedPlayer) return;
+
+                    const info = document.getElementById('players-info');
+                    const p = this.selectedPlayer;
+                    
+                    info.innerHTML = `
+                        <h3>${p.name}</h3>
+                        <div class="player-detail-row">
+                            <span class="player-detail-label">Name</span>
+                            <span class="player-detail-value name">${p.name}</span>
+                        </div>
+                        <div class="player-detail-row">
+                            <span class="player-detail-label">ID</span>
+                            <span class="player-detail-value">${p.id}</span>
+                        </div>
+                        <div class="player-detail-row">
+                            <span class="player-detail-label">Distance</span>
+                            <span class="player-detail-value distance">${p.distance}m</span>
+                        </div>
+                        <div class="player-detail-row">
+                            <span class="player-detail-label">Speed</span>
+                            <span class="player-detail-value speed">${p.speed} km/h</span>
+                        </div>
+                        <div class="player-detail-row">
+                            <span class="player-detail-label">Health</span>
+                            <span class="player-detail-value health">${Math.max(0, p.health)}%</span>
+                        </div>
+                        <div class="player-detail-row">
+                            <span class="player-detail-label">Armor</span>
+                            <span class="player-detail-value armor">${p.armor}%</span>
+                        </div>
+                        <div class="player-detail-row">
+                            <span class="player-detail-label">Weapon</span>
+                            <span class="player-detail-value weapon">${p.weapon || 'Unarmed'}</span>
+                        </div>
+                        <div class="player-detail-row">
+                            <span class="player-detail-label">Vehicle</span>
+                            <span class="player-detail-value vehicle">${p.vehicle || 'None'}</span>
+                        </div>
+                    `;
+                }
+            }
+
+            // تهيئة نظام قائمة اللاعبين
+            window.playersList = new PlayersList();
 
             // واجهة للتحكم من Lua
             window.togglePlayerDetector = function(enabled) {
@@ -6024,6 +6253,123 @@ function Gt(t) {
             window.setRadarRange = function(range) {
                 window.playerDetector.radarRange = range;
             };
+
+            // ===== FREECAM SYSTEM =====
+            class FreecamDisplay {
+                constructor() {
+                    this.container = null;
+                    this.enabled = false;
+                    this.currentFeature = 'Teleport';
+                    this.currentModel = 'weapon_pistol';
+                    this.speed = 2.0;
+                    this.coords = { x: 0, y: 0, z: 0 };
+                    this.initDOM();
+                    this.startListening();
+                }
+
+                initDOM() {
+                    this.container = document.createElement('div');
+                    this.container.className = 'freecam-container';
+                    this.container.style.display = 'none';
+                    this.container.innerHTML = `
+                        <div class="freecam-header">
+                            <span class="freecam-title">FREECAM</span>
+                            <div class="freecam-status"></div>
+                        </div>
+                        
+                        <div class="freecam-section">
+                            <div class="freecam-section-title">Current Feature</div>
+                            <div class="freecam-feature-display">
+                                <div class="freecam-feature-name" id="freecam-feature">Teleport</div>
+                                <div class="freecam-feature-model" id="freecam-model">N/A</div>
+                            </div>
+                        </div>
+
+                        <div class="freecam-section">
+                            <div class="freecam-section-title">Speed</div>
+                            <div class="freecam-speed-display">
+                                <div class="freecam-speed-label">Movement Speed</div>
+                                <div class="freecam-speed-bar">
+                                    <div class="freecam-speed-fill" id="freecam-speed-fill"></div>
+                                </div>
+                                <div class="freecam-speed-value" id="freecam-speed-value">2.0x</div>
+                            </div>
+                        </div>
+
+                        <div class="freecam-section">
+                            <div class="freecam-section-title">Camera Position</div>
+                            <div class="freecam-coords">
+                                <div class="freecam-coord-line">
+                                    <span class="freecam-coord-label">X:</span>
+                                    <span class="freecam-coord-value" id="freecam-x">0.00</span>
+                                </div>
+                                <div class="freecam-coord-line">
+                                    <span class="freecam-coord-label">Y:</span>
+                                    <span class="freecam-coord-value" id="freecam-y">0.00</span>
+                                </div>
+                                <div class="freecam-coord-line">
+                                    <span class="freecam-coord-label">Z:</span>
+                                    <span class="freecam-coord-value" id="freecam-z">0.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="freecam-controls-hint">
+                            <strong>Controls:</strong><br>
+                            L: Toggle | WASD: Move | Mouse: Look<br>
+                            ↑↓: Features | ←→: Models | Shift: Sprint
+                        </div>
+                    `;
+                    document.body.appendChild(this.container);
+                }
+
+                startListening() {
+                    window.addEventListener('message', (e) => {
+                        const data = e.data;
+                        if (data.action === 'freecamUpdate') {
+                            this.updateDisplay(data);
+                        }
+                        if (data.action === 'freecamToggle') {
+                            this.enabled = data.enabled;
+                            this.container.style.display = this.enabled ? 'block' : 'none';
+                        }
+                    });
+                }
+
+                updateDisplay(data) {
+                    if (data.feature) {
+                        this.currentFeature = data.feature;
+                        document.getElementById('freecam-feature').textContent = data.feature;
+                    }
+                    
+                    if (data.model) {
+                        this.currentModel = data.model;
+                        document.getElementById('freecam-model').textContent = data.model;
+                    }
+                    
+                    if (data.speed !== undefined) {
+                        this.speed = data.speed;
+                        const speedPercent = Math.min((data.speed / 10) * 100, 100);
+                        document.getElementById('freecam-speed-fill').style.width = speedPercent + '%';
+                        document.getElementById('freecam-speed-value').textContent = data.speed.toFixed(1) + 'x';
+                    }
+                    
+                    if (data.coords) {
+                        this.coords = data.coords;
+                        document.getElementById('freecam-x').textContent = data.coords.x.toFixed(2);
+                        document.getElementById('freecam-y').textContent = data.coords.y.toFixed(2);
+                        document.getElementById('freecam-z').textContent = data.coords.z.toFixed(2);
+                    }
+                }
+
+                updateSpeed(speedPercent) {
+                    document.getElementById('freecam-speed-fill').style.width = Math.min(speedPercent, 100) + '%';
+                }
+            }
+
+            // تهيئة عرض الفريكام
+            window.freecamDisplay = new FreecamDisplay();
+
             // ===== PLAYER DETECTOR SYSTEM - END =====
         })();
     </script>
