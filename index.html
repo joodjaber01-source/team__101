@@ -90,18 +90,7 @@ html, body {
     filter: brightness(0.8) contrast(1.2);
 }
 
-/* Breadcrumb Bar */
-.breadcrumb-container.svelte-11594kh {
-    background: #1a1a1a;
-    color: #ffffff;
-    font-size: 11px;
-    padding: 10px 12px;
-    text-align: center;
-    border-bottom: none;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
+
 
 .breadcrumb-text.svelte-11594kh {
     color: #ffffff;
@@ -170,13 +159,13 @@ html, body {
 }
 
 .menu-item.svelte-11594kh:hover {
-    background: rgba(204, 51, 0, 0.15);
-    border: 1px solid rgba(204, 51, 0, 0.3);
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(10, 10, 10, 0.3);
     color: #ffffff;
 }
 
 .menu-item.active.svelte-11594kh {
-    background: rgba(204, 51, 0, 0.25);
+    background: rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(0, 0, 0, 0.5);
     color: #ffffff;
 }
@@ -1105,7 +1094,7 @@ const Lt = {
     name: "MAX",
     description: "Premium MAX-style Dark Theme",
     colors: {
-        primary: "#3a3a3a", // Red for MAX feel
+        primary: "#000000", // Red for MAX feel
         secondary: "#000000", // Black
         accent: "#ffffff", // White for contrast
         background: "#000000", // Pure black
@@ -1123,54 +1112,54 @@ const Lt = {
                 name: "blue",
                 description: "Cool blue theme with ocean vibes",
                 colors: {
-                    primary: "#3b82f6",
-                    secondary: "#60a5fa",
-                    accent: "#93c5fd",
-                    background: "#0f1419",
-                    surface: "#1e293b",
-                    text: "#ffffff",
-                    textSecondary: "#cbd5e1",
+                    primary: "#000000",
+                    secondary: "#000000",
+                    accent: "#000000",
+                    background: "#000000",
+                    surface: "#000000",
+                    text: "#000000",
+                    textSecondary: "#000000",
                     border: "rgba(59, 130, 246, 0.2)",
-                    success: "#10b981",
-                    warning: "#f59e0b",
-                    error: "#ef4444",
-                    info: "#3b82f6"
+                    success: "#000000",
+                    warning: "#000000",
+                    error: "#000000",
+                    info: "#000000"
                 }
             }
               , as = {
                 name: "green",
                 description: "Fresh green theme with nature vibes",
                 colors: {
-                    primary: "#10b981",
-                    secondary: "#34d399",
-                    accent: "#6ee7b7",
-                    background: "#0f1b0f",
-                    surface: "#1a2e1a",
-                    text: "#ffffff",
-                    textSecondary: "#d1fae5",
+                    primary: "#000000",
+                    secondary: "#000000",
+                    accent: "#000000",
+                    background: "#000000",
+                    surface: "#000000",
+                    text: "#000000",
+                    textSecondary: "#000000",
                     border: "rgba(16, 185, 129, 0.2)",
-                    success: "#10b981",
-                    warning: "#f59e0b",
-                    error: "#ef4444",
-                    info: "#10b981"
+                    success: "#000000",
+                    warning: "#000000",
+                    error: "#000000",
+                    info: "#000000"
                 }
             }
               , os = {
                 name: "red",
                 description: "Bold red theme with fire vibes",
                 colors: {
-                    primary: "#ef4444",
-                    secondary: "#f87171",
-                    accent: "#fca5a5",
-                    background: "#1f0f0f",
-                    surface: "#2e1a1a",
+                    primary: "#000000",
+                    secondary: "#000000",
+                    accent: "#000000",
+                    background: "#000000",
+                    surface: "#000000",
                     text: "#ffffff",
                     textSecondary: "#fecaca",
                     border: "rgba(239, 68, 68, 0.2)",
-                    success: "#10b981",
-                    warning: "#f59e0b",
-                    error: "#ef4444",
-                    info: "#ef4444"
+                    success: "#000000",
+                    warning: "#000000",
+                    error: "#000000",
+                    info: "#000000"
                 }
             }
               , cs = {
@@ -1231,18 +1220,18 @@ const Lt = {
                 name: "dark",
                 description: "Pure dark theme with minimal colors",
                 colors: {
-                    primary: "#ffffff",
-                    secondary: "#e5e7eb",
-                    accent: "#9ca3af",
+                    primary: "#000000",
+                    secondary: "#000000",
+                    accent: "#000000",
                     background: "#000000",
-                    surface: "#111111",
-                    text: "#ffffff",
+                    surface: "#000000",
+                    text: "#000000",
                     textSecondary: "#9ca3af",
                     border: "rgba(255, 255, 255, 0.1)",
-                    success: "#10b981",
-                    warning: "#f59e0b",
-                    error: "#ef4444",
-                    info: "#6b7280"
+                    success: "#000000",
+                    warning: "#000000",
+                    error: "#000000",
+                    info: "#000000"
                 }
             }
               , ps = {
@@ -1267,7 +1256,6 @@ const Lt = {
                 purple: Lt,
                 blue: rs,
                 green: as,
-                red: os,
                 orange: cs,
                 pink: us,
                 dark: ds,
@@ -1275,7 +1263,7 @@ const Lt = {
                 rainbow: fs
             }
               , Oe = x({
-                currentTheme: "purple",
+                currentTheme: "dark",
                 customThemes: {}
             })
               , ht = x(Lt)
@@ -2818,9 +2806,9 @@ function Gt(t) {
                     n = 178,
                     s = "Delete";
                     break;
-                case "Home":
+                case "":
                     n = 213,
-                    s = "Home";
+                    s = "";
                     break;
                 case "End":
                     n = 214,
@@ -2930,7 +2918,7 @@ function Gt(t) {
                     75: "F2",
                     121: "Insert",
                     178: "Delete",
-                    213: "Home",
+                    213: "",
                     214: "End",
                     96: "Left Ctrl",
                     97: "Left Alt",
@@ -3647,7 +3635,7 @@ function Gt(t) {
                 current: 0,
                 activeMenu: [],
                 showing: !1,
-                breadcrumb: "Home",
+                breadcrumb: "  ",
                 selectedPlayer: null,
                 contentVisible: !0
             })
@@ -4349,17 +4337,6 @@ function Gt(t) {
                 background: transparent
             }
 
-            .breadcrumb-container.svelte-11594kh.svelte-11594kh {
-                background: linear-gradient(135deg,#000000e6,#1a1a1acc);
-                color: #fff;
-                font-size: 1vh;
-                padding: .8vh 1.2vh;
-                text-align: center;
-                border-bottom: .05vh solid rgba(139,92,246,.2);
-                font-family: Segoe UI,sans-serif;
-                font-weight: 400;
-                transition: all .3s ease
-            }
 
  .breadcrumb-text.svelte-11594kh.svelte-11594kh {
     color: #ffffff;
@@ -5680,13 +5657,6 @@ function Gt(t) {
     <div id="keybinds-list"></div>
 </div>
 
-<!-- Player Search -->
-<div id="player-search-container" class="player-search-container">
-    <div class="search-title">Search Player</div>
-    <input type="text" id="player-search-input" class="search-input" placeholder="ابحث عن لاعب...">
-    <div id="search-results" class="search-results"></div>
-</div>
-
 <!-- Color Picker Menu -->
 <div id="color-picker-container" class="color-picker-container">
     <div class="color-picker-title">Color Settings</div>
@@ -5698,7 +5668,7 @@ function Gt(t) {
     <div class="color-input-group">
         <span class="color-label">Main</span>
         <input type="color" id="color-main" class="color-input" value="#cc3300">
-        <div id="color-preview-main" class="color-preview" style="background: #cc3300;"></div>
+        <div id="color-preview-main" class="color-preview" style="background: #353535;"></div>
     </div>
     
     <div class="color-input-group">
@@ -5866,6 +5836,8 @@ function Gt(t) {
                 }
             });
 
+            
+
             // Apply colors button
             const applyBtn = document.getElementById('apply-colors');
             if (applyBtn) {
@@ -5894,6 +5866,9 @@ function Gt(t) {
                 });
             }
 
+
+            
+
             // Reset colors button
             const resetBtn = document.getElementById('reset-colors');
             if (resetBtn) {
@@ -5906,6 +5881,8 @@ function Gt(t) {
                     document.getElementById('color-preview-accent').style.background = '#00ffff';
                 });
             }
+
+            
 
             // expose helper to the console for testing
             window.ApplyDesign = applyDesign;
